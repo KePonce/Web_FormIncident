@@ -45,6 +45,38 @@ class Formularios extends Component {
             ))
           }
         </div>
+        <div><table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">DPI</th>
+              <th scope="col">Celular</th>
+              <th scope="col">Inconformidad</th>
+              <th scope="col">Departamento</th>
+              <th scope="col">Municipio</th>
+              <th scope="col">Encargado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.formularios === null && <p>Loading formularios...</p>}
+            {
+              this.state.formularios && this.state.formularios.map(formulario => (
+                    <tr>
+                      <th>{formulario.id}</th>
+                      <td>{formulario.nombre}</td>
+                      <td>{formulario.dpi}</td>
+                      <td>{formulario.celular}</td>
+                      <td>{formulario.inconformidad}</td>
+                      <td>{formulario.departamento}</td>
+                      <td>{formulario.municipio}</td>
+                      <td>{formulario.encargado}</td>
+                    </tr>
+              ))
+            }
+          </tbody>
+        </table>
+        </div>
       </div>
     )
   }
