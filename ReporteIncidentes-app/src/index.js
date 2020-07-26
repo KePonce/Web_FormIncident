@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
 });
 
 // get a specific incidente
-app.get('/incidente/:id', (req, res) => {
-  const incidente = incidente.filter(q => (q.id === parseInt(req.params.id)));
+app.get('/incidente/:dpi', (req, res) => {
+  const incidente = incidente.filter(q => (q.dpi === parseInt(req.params.dpi)));
   if (incidente.length > 1) return res.status(500).send();
   if (incidente.length === 0) return res.status(404).send();
   res.send(incidente[0]);

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 class Formularios extends Component {
@@ -22,30 +21,7 @@ class Formularios extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">
-          {this.state.formularios === null && <p>Loading formularios...</p>}
-          {
-            this.state.formularios && this.state.formularios.map(formulario => (
-              <div key={formulario.id} className="col-sm-12 col-md-4 col-lg-3">
-                <Link to={`/formulario/${formulario.id}`}>
-                  <div className="card text-white bg-success mb-3">
-                    <div className="card-header">Encargado: {formulario.encargado}</div>
-                    <div className="card-body">
-                      <p className="card-title">nombre: {formulario.nombre}</p>
-                      <p className="card-text">dpi: {formulario.dpi}</p>
-                      <p className="card-title">celular: {formulario.celular}</p>
-                      <p className="card-text">inconformidad: {formulario.inconformidad}</p>
-                      <p className="card-title">departamento: {formulario.departamento}</p>
-                      <p className="card-text">municipio: {formulario.municipio}</p>
-                      <p className="card-text">{formulario.encargado}</p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))
-          }
-        </div>
-        <div><table class="table">
+        <div><table class="table" >
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
@@ -56,6 +32,8 @@ class Formularios extends Component {
               <th scope="col">Departamento</th>
               <th scope="col">Municipio</th>
               <th scope="col">Encargado</th>
+              <th scope="col">Guardar</th>
+              <th scope="col">Borrar</th>
             </tr>
           </thead>
           <tbody>
@@ -71,6 +49,8 @@ class Formularios extends Component {
                       <td>{formulario.departamento}</td>
                       <td>{formulario.municipio}</td>
                       <td>{formulario.encargado}</td>
+                      <td><input class='Guardar' type='button' value='Guardar'/></td>
+                      <td><input class='Borrar' type='button' value='Borrar'/></td>
                     </tr>
               ))
             }

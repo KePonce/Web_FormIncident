@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar/NavBar';
-import Formularios from './Formularios/Formularios'
+import Formulario from './Formularios/Formulario';
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <NavBar/>
-        <Formularios/>
-      </div>
+      <>
+          <NavBar/>
+          <Formulario/>
+      </>
     );
   }
 }

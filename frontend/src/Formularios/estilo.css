@@ -1,0 +1,104 @@
+:root{
+    --colorTextos: #0f0f0f;
+}
+*, 
+::before,::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+
+input, textarea, select{
+background: none;
+color:#141414;
+font-size: 18px;
+padding: 10px 10px 10px 5px;
+display: block;
+width: 100%;
+border:none;
+border-bottom: 1px solid var(--colorTextos);
+resize: none;
+}
+
+input:focus,textarea:focus,select:focus{
+outline: none;
+color:black;
+}
+
+input:focus~label, input:valid~label, 
+textarea:focus~label, textarea:valid~label,
+select:focus~label, select:valid~label{
+position: absolute;
+top: -14px;
+font-size: 12px;
+color: #2e8bb3;
+}
+
+label{
+color: var(--colorTextos);
+font-size: 16px;
+position: absolute;
+left: 5px;
+top:10px;
+transition: 0.5s ease all;
+pointer-events: none;
+}
+
+input:focus~.barra::before, textarea:focus~.barra::before, select:focus~.barra::before{
+width: 100%;
+}
+.barra{
+position: relative;
+display: block;
+width: 100%;
+}
+.barra::before{
+content: '';
+height: 2px;
+width: 0%;
+bottom: 0;
+position: absolute;
+background: #02466b;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #02466b, #02466b);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #02466b, #02466b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+transition: .3s ease all;
+left: 0%;
+}
+button{
+background: #02466b;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #02466b, #02466b);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #02466b, #02466b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */        
+display: block;
+width: 100px;
+height: 40px;
+border:none;
+color:#fff; 
+border-radius: 4px;
+font-size: 16px;
+margin: 10px auto;
+cursor: pointer;
+}
+
+@media screen and (max-width:1100px){
+form{
+    width: 50%;
+}
+}
+
+@media screen and (max-width:600px){
+form{
+    width: 60%;
+}
+}
+
+@media screen and (max-width:450px){
+form{
+    width: 80%;
+}
+}
+
+@media screen and (max-width:300px){
+form{
+    width: 90%;
+}
+}
