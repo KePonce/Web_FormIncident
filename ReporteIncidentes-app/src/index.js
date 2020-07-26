@@ -24,13 +24,13 @@ app.use(cors());
 app.use(morgan('combined'));
 
 // retrieve all incidentes
-app.get('/', (req, res) => {
+app.get('/tabla', (req, res) => {
   res.send(VecIncidentes);
 });
 
 // get a specific incidente
-app.get('/incidente/:dpi', (req, res) => {
-  const incidente = incidente.filter(q => (q.dpi === parseInt(req.params.dpi)));
+app.get('/:id', (req, res) => {
+  const incidente = incidente.filter(q => (q.id === parseInt(req.params.id)));
   if (incidente.length > 1) return res.status(500).send();
   if (incidente.length === 0) return res.status(404).send();
   res.send(incidente[0]);
@@ -47,7 +47,7 @@ app.post('/test', (req, res) => {
     inconformidad: req.body.inconformidad,
     departamento: req.body.departamento,
     municipio: req.body.municipio,
-    encargado: [],
+    encargado: "",
   };
   VecIncidentes.push(newIncidente);
   console.log(this.VecIncidentes)
@@ -56,16 +56,13 @@ app.post('/test', (req, res) => {
 
 // insert a encargado to a incident
 app.post('/encargado/:id', (req, res) => {
-  const {encargado} = req.body;
+  const encargado = req.body.encargado;
 
   const incidente = VecIncidentes.filter(q => (q.id === parseInt(req.params.id)));
   if (incidente.length > 1) return res.status(500).send();
   if (incidente.length === 0) return res.status(404).send();
 
-  incidente[0].encargado.push({
-    encargado,
-  });
-
+  incidente[0].encargado.push(encargado);
   res.status(200).send();
 });
 

@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Inicio from './Inicio/Inicio';
+import EditarInc from './Inicio/Editar'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
@@ -12,7 +13,8 @@ ReactDOM.render(
               <Switch>
                   {/*/Paginas*/}
                   <Route exact path='/' component={App} />
-                  <Route exact path='/datos' component={Inicio} />
+                  <Route exact path='/tabla' component={Inicio} />
+                  <Route exact path='/tabla/:Id' Component={EditarInc}/>
               </Switch>
           </div>
       </Router>,

@@ -16,7 +16,6 @@ class Formulario extends React.Component {
   }
 
   render() {
- 
    return (
     <>
         <main role="main" className="flex-shrink-0 mt-5">
@@ -30,28 +29,22 @@ class Formulario extends React.Component {
                 <div className="row">
                 <div className="col-md-6">
                     <div className="grupo">
-                    <input type="text"   required></input><span className="barra"></span>
-                    <label>Nombre(s)*:</label>
+                    <input type="text" id="name" required></input><span className="barra"></span>
+                    <label>Nombre Completo de Quien Reporta*:</label>
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <div className="grupo">
-                    <input type="text"   required></input><span className="barra"></span>
-                    <label>Apellido(s)*: </label>
+                    <div  className="grupo">
+                    <input type="text" id="dpi" pattern="[0-9]+"  minLength="13" maxLength="15" required></input><span className="barra"></span>
+                    <label>DPI*:</label>
                     </div>
-                </div>
+                </div> 
                 </div>
                 <hr></hr>
                 <div className="row">
                 <div className="col-md-6">
-                    <div  className="grupo">
-                    <input type="text" pattern="[0-9]+"  minLength="13" maxLength="15" required></input><span className="barra"></span>
-                    <label>DPI*:</label>
-                    </div>
-                </div> 
-                <div className="col-md-6">
                     <div className="grupo">
-                    <input type="text" pattern="[0-9]+" maxLength="8" minLength="8" required></input><span className="barra"></span>
+                    <input type="text"id="celular" pattern="[0-9]+" maxLength="8" minLength="8" required></input><span className="barra"></span>
                     <label>Teléfono registrado*</label>
                     </div>
                 </div>
@@ -60,7 +53,7 @@ class Formulario extends React.Component {
                 <div className="row">
                 <div className="col-sm-6"  >
                     <div  className="grupo">
-                    <select  required>
+                    <select id="depto" required>
                             <option ></option>
                             <option>Alta Verapaz</option>
                             <option>Baja Verapaz</option>
@@ -90,7 +83,7 @@ class Formulario extends React.Component {
                 </div>
                 <div className="col-sm-6">
                     <div  className="grupo">
-                    <select  required>
+                    <select id="municip" required>
                             <option></option>
                             <optgroup label="Alta Verapaz" > 
                             <option>Cobán</option>
@@ -475,8 +468,7 @@ class Formulario extends React.Component {
                 <div className="row">
                 <div className="col-sm-8"  >
                     <div  className="grupo">
-                    
-                    <select  required>
+                    <select id="incident" required>
                             <option ></option>
                             <option>Cuenta no tiene Fondos</option>
                             <option>Saldo no coincide con lo gastado</option>

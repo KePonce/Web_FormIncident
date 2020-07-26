@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-class Formularios extends Component {
+class Datos_Formulario extends Component {
   constructor(props) {
     super(props);
 
@@ -12,7 +12,7 @@ class Formularios extends Component {
 
   //Conexion con el backend en puerto 8081
   async componentDidMount() {
-    const formularios = (await axios.get('http://localhost:8081/')).data;
+    const formularios = (await axios.get('http://localhost:8081/tabla')).data;
     this.setState({
       formularios,
     });
@@ -62,4 +62,4 @@ class Formularios extends Component {
   }
 }
 
-export default Formularios;
+export default Datos_Formulario;
