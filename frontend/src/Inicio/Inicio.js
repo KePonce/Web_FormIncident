@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../NavBar/NavBar';
-import Formularios from '../Formularios/Formularios';
+import Formularios from '../Formularios/Datos_Formulario';
 
 class Inicio extends React.Component {
   render() {
