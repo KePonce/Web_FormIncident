@@ -5,16 +5,49 @@ import axios from 'axios';
 
 //<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
 class Formulario extends React.Component {
- 
+    
+    constructor(props) {
+        super(props);
+        this.state = {name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:""};
+    
+        this.handleChange = this.handleChange.bind(this);
+        
+      }
+    
+      handleChange(event) {
+        this.setState({[event.target.name]: event.target.value});
+      }
+
+      onSubmit = () => {
+          
+            alert(`Nombre: ${this.state.name} y DPI: ${this.state.dpi} ${this.state.departamento} ${this.state.municipio} ${this.state.inconformidad}`)
+                    axios.post('http://localhost:8081/post',{
+                        nombre: this.state.name,
+                        dpi: this.state.dpi,
+                        celular: this.state.celular,
+                        inconformidad: this.state.inconformidad,
+                        departamento: this.state.departamento,
+                        municipio: this.state.municipio
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }
+
+            
 
 //Conexion con el backend en puerto 8081
-  async componentDidMount() {
+  /*async componentDidMount() {
     const formularios = (await axios.post('http://localhost:8081/', )).data;
     this.setState({
       formularios,
     });
-  }
+  }*/
 
+    
   render() {
    return (
     <>
@@ -29,13 +62,13 @@ class Formulario extends React.Component {
                 <div className="row">
                 <div className="col-md-6">
                     <div className="grupo">
-                    <input type="text" id="name" required></input><span className="barra"></span>
+                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} id="name" required></input><span className="barra"></span>
                     <label>Nombre Completo de Quien Reporta*:</label>
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div  className="grupo">
-                    <input type="text" id="dpi" pattern="[0-9]+"  minLength="13" maxLength="15" required></input><span className="barra"></span>
+                    <input type="text" name="dpi" value={this.state.dpi} onChange={this.handleChange} pattern="[0-9]+"  minLength="13" maxLength="15" required></input><span className="barra"></span>
                     <label>DPI*:</label>
                     </div>
                 </div> 
@@ -44,7 +77,7 @@ class Formulario extends React.Component {
                 <div className="row">
                 <div className="col-md-6">
                     <div className="grupo">
-                    <input type="text"id="celular" pattern="[0-9]+" maxLength="8" minLength="8" required></input><span className="barra"></span>
+                    <input type="text" name="celular" value={this.state.celular} onChange={this.handleChange} id="celular" pattern="[0-9]+" maxLength="8" minLength="8" required></input><span className="barra"></span>
                     <label>Teléfono registrado*</label>
                     </div>
                 </div>
@@ -53,7 +86,7 @@ class Formulario extends React.Component {
                 <div className="row">
                 <div className="col-sm-6"  >
                     <div  className="grupo">
-                    <select id="depto" required>
+                    <select  id="depto" name="departamento" value={this.state.departamento} onChange={this.handleChange} required>
                             <option ></option>
                             <option>Alta Verapaz</option>
                             <option>Baja Verapaz</option>
@@ -83,7 +116,7 @@ class Formulario extends React.Component {
                 </div>
                 <div className="col-sm-6">
                     <div  className="grupo">
-                    <select id="municip" required>
+                    <select id="municipio" name="municipio" value={this.state.municipio} onChange={this.handleChange} required>
                             <option></option>
                             <optgroup label="Alta Verapaz" > 
                             <option>Cobán</option>
@@ -468,7 +501,7 @@ class Formulario extends React.Component {
                 <div className="row">
                 <div className="col-sm-8"  >
                     <div  className="grupo">
-                    <select id="incident" required>
+                    <select id="incident" name="inconformidad" value={this.state.inconformidad} onChange={this.handleChange} required>
                             <option ></option>
                             <option>Cuenta no tiene Fondos</option>
                             <option>Saldo no coincide con lo gastado</option>
@@ -492,7 +525,7 @@ class Formulario extends React.Component {
                 </div>
                 </div>
                 <hr></hr>
-                <button type="submit" className="btn btn-info btn-block">Enviar</button>      
+                <button type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar</button>      
             </form>
         </main>
     </>
