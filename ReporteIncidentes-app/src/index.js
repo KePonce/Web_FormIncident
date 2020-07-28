@@ -29,7 +29,7 @@ app.get('/tabla', (req, res) => {
 });
 
 // get a specific incidente
-app.get('/:id', (req, res) => {
+app.get('/tabla/:id', (req, res) => {
   const incidente = incidente.filter(q => (q.id === parseInt(req.params.id)));
   if (incidente.length > 1) return res.status(500).send();
   if (incidente.length === 0) return res.status(404).send();

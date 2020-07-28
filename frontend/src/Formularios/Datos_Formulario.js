@@ -21,8 +21,8 @@ class Datos_Formulario extends Component {
   render() {
     return (
       <div className="container">
-        <div><table class="table" >
-          <thead class="thead-dark">
+        <div><table className="table" >
+          <thead className="thead-dark">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Nombre</th>
@@ -49,8 +49,8 @@ class Datos_Formulario extends Component {
                       <td>{formulario.departamento}</td>
                       <td>{formulario.municipio}</td>
                       <td>{formulario.encargado}</td>
-                      <td><input class='Guardar' type='button' value='Guardar'/></td>
-                      <td><input class='Borrar' type='button' value='Borrar'/></td>
+                      <td><input className='Guardar' type='button' value='Guardar'/></td>
+                      <td><input className='Borrar' type='button' value='Borrar'/></td>
                     </tr>
               ))
             }
