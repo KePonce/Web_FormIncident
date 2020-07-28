@@ -6,21 +6,21 @@ import axios from 'axios';
 //<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
 class Formulario extends React.Component {
     
+    //Creation on vals 
     constructor(props) {
         super(props);
         this.state = {name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:""};
-    
         this.handleChange = this.handleChange.bind(this);
-        
       }
     
+      //Changes on inputs and selects
       handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
       }
 
+      //Button function to post incidents
       onSubmit = () => {
-          
-            alert(`Nombre: ${this.state.name} y DPI: ${this.state.dpi} ${this.state.departamento} ${this.state.municipio} ${this.state.inconformidad}`)
+                    //Conect to backend and post new incident
                     axios.post('http://localhost:8081/post',{
                         nombre: this.state.name,
                         dpi: this.state.dpi,
@@ -37,17 +37,6 @@ class Formulario extends React.Component {
                     });
                 }
 
-            
-
-//Conexion con el backend en puerto 8081
-  /*async componentDidMount() {
-    const formularios = (await axios.post('http://localhost:8081/', )).data;
-    this.setState({
-      formularios,
-    });
-  }*/
-
-    
   render() {
    return (
     <>
@@ -525,7 +514,7 @@ class Formulario extends React.Component {
                 </div>
                 </div>
                 <hr></hr>
-                <button type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar</button>      
+                <button type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Guardar</button>      
             </form>
         </main>
     </>

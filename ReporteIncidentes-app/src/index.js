@@ -37,7 +37,7 @@ app.get('/:id', (req, res) => {
 });
 
 // insert a new incidente
-app.post('/test', (req, res) => {
+app.post('/post', (req, res) => {
   //const {title, description} = req.body;
   const newIncidente = {
     id: VecIncidentes.length + 1,
