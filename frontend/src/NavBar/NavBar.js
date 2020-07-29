@@ -7,7 +7,7 @@ function NavBar() {
         <a className="navbar-brand" href="#">Formulario</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
-        </button><a className="navbar-brand" href="#/tabla">Datos</a>
+        </button><a className="navbar-brand" href="#/incidente">Datos</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

@@ -13,8 +13,8 @@ ReactDOM.render(
               <Switch>
                   {/*/Paginas*/}
                   <Route exact path='/' component={App} />
-                  <Route exact path='/tabla' component={Inicio} />
-                  <Route exact path='/tabla/:Id' Component={EditarInc}/>
+                  <Route exact path='/incidente' component={Inicio} />
+                  <Route path='/incidente/:DPI' component={EditarInc}/>
               </Switch>
           </div>
       </Router>,
