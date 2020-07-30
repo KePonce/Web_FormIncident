@@ -92,6 +92,16 @@ app.post('/ActualizarInc/:dpi', (req, res) => {
     console.log("datos actualizados")
   })
 });
+
+app.post('/ActualizarEstado/:dpi', (req, res) => {
+  let emp = req.body;
+  mysqlConnection.query('UPDATE incidente SET ESTADO = ? WHERE DPI = ?', [emp.estado,emp.id], function(err,data){
+    if(err)
+    console.log(err);
+    else
+    console.log("datos actualizados")
+  })
+});
 // insert a new incidente
 
   app.post('/InsertarInc', (req, res) => {

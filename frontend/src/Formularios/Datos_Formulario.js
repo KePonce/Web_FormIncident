@@ -10,6 +10,22 @@ class Datos_Formulario extends Component {
     };
   }
 
+  onSubmit = (dpi) => {
+          
+            
+    axios.post('http://localhost:8082/ActualizarEstado/'+dpi,{
+        id: dpi,
+        estado: "Terminado",
+        
+    })
+    .then(function (response) {
+        alert(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+}
 
 
 
@@ -36,9 +52,10 @@ class Datos_Formulario extends Component {
               <th scope="col">Inconformidad</th>
               <th scope="col">Departamento</th>
               <th scope="col">Municipio</th>
+              <th scope="col">Estado</th>
               <th scope="col">Encargado</th>
-              <th scope="col">Guardar</th>
-              <th scope="col">Borrar</th>
+              <th scope="col">Asignar</th>
+              <th scope="col">Resolver</th>
             </tr>
           </thead>
           <tbody>
@@ -54,10 +71,11 @@ class Datos_Formulario extends Component {
                       <td>{formulario.INCONFORMIDAD}</td>
                       <td>{formulario.DEPARTAMENTO}</td>
                       <td>{formulario.MUNICIPIO}</td>
+                      <td>{formulario.ESTADO}</td>
                       <td>{formulario.ENCARGADO}</td>
                       
                       <td><Link class="btn btn-outline-info "  to={"/incidente/"+formulario.DPI} >Asignar</Link></td>
-                      
+                      <td><a href="#/incidente" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Resolver</a></td>
                     </tr>
               ))
             }
