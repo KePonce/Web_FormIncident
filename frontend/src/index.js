@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import Inicio from './Inicio/Inicio';
 import EditarInc from './Inicio/Editar'
+import Login from './Formularios/Login'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
@@ -12,9 +13,10 @@ ReactDOM.render(
           <div>
               <Switch>
                   {/*/Paginas*/}
-                  <Route exact path='/' component={App} />
+                  <Route exact path='/login' component={Login} />
+                  <Route exact path='/formulario' component={App} />
                   <Route exact path='/incidente' component={Inicio} />
-                  <Route path='/incidente/:DPI' component={EditarInc}/>
+                  <Route path="/incidente/:dpi" component={EditarInc} />
               </Switch>
           </div>
       </Router>,

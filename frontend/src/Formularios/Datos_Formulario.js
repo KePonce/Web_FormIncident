@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-
 class Datos_Formulario extends Component {
   constructor(props) {
     super(props);
@@ -11,12 +10,12 @@ class Datos_Formulario extends Component {
     };
   }
 
-  //Conexion con el backend en puerto 8081
+  //Conexion con el backend en puerto 8082
   async componentDidMount() {
-    const formularios = (await axios.get('http://localhost:8081/incidente/')).data;
-    console.log(formularios);
+    const formularios = (await axios.get('http://localhost:8082/incidente')).data;
+    
     this.setState({
-      formularios,
+      formularios
     });
   }
 
@@ -43,6 +42,7 @@ class Datos_Formulario extends Component {
             {
               this.state.formularios && this.state.formularios.map(formulario => (
                     <tr>
+                      {console.log(formulario)}
                       <th>{formulario.IDINCIDENT}</th>
                       <td>{formulario.NOMBRE_COMPLETO}</td>
                       <td>{formulario.DPI}</td>
@@ -51,8 +51,7 @@ class Datos_Formulario extends Component {
                       <td>{formulario.DEPARTAMENTO}</td>
                       <td>{formulario.MUNICIPIO}</td>
                       <td>{formulario.ENCARGADO}</td>
-                      <td><Link class="btn btn-outline-info "  to={"/incidente/"+formulario.DPI} >Editar</Link></td>
-                      <td><input className='Borrar' type='button' value='Borrar'/></td>
+                      <td><Link class="btn btn-outline-info "  to={"/incidente/"+formulario.DPI} >Asignar</Link></td>
                     </tr>
               ))
             }

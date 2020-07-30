@@ -9,7 +9,10 @@ class Formulario extends React.Component {
     //Creation on vals 
     constructor(props) {
         super(props);
-        this.state = {name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:""};
+        this.state = {name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
+        estado:"", descripcion:"", encargado:""
+        };
+    
         this.handleChange = this.handleChange.bind(this);
       }
     
@@ -20,15 +23,16 @@ class Formulario extends React.Component {
 
       //Button function to post incidents
       onSubmit = () => {
-                    //Conect to backend and post new incident
-                    axios.post('http://localhost:8081/incident',{
-                        NOMBRE_COMPLETO: this.state.name,
-                        DPI: this.state.dpi,
-                        CELULAR: this.state.celular,
-                        INCONFORMIDAD: this.state.inconformidad,
-                        DEPARTAMENTO: this.state.departamento,
-                        MUNICIPIO: this.state.municipio,
-                        ENCARGADO: ''
+                    axios.post('http://localhost:8082/InsertarInc',{
+                        nombre: this.state.name,
+                        dpi: this.state.dpi,
+                        celular: this.state.celular,
+                        inconformidad: this.state.inconformidad,
+                        departamento: this.state.departamento,
+                        municipio: this.state.municipio,
+                        estado: 'creado',
+                        descripcion: '',
+                        encargado: ''
                     })
                     .then(function (response) {
                         console.log(response);
@@ -515,7 +519,7 @@ class Formulario extends React.Component {
                 </div>
                 </div>
                 <hr></hr>
-                <button type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Guardar</button>      
+                <a href="#/incidente" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar</a>      
             </form>
         </main>
     </>
