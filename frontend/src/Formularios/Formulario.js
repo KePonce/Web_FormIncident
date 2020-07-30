@@ -8,7 +8,9 @@ class Formulario extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:""};
+        this.state = {name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
+        estado:"", descripcion:"", encargado:""
+        };
     
         this.handleChange = this.handleChange.bind(this);
         
@@ -20,14 +22,17 @@ class Formulario extends React.Component {
 
       onSubmit = () => {
           
-            alert(`Nombre: ${this.state.name} y DPI: ${this.state.dpi} ${this.state.departamento} ${this.state.municipio} ${this.state.inconformidad}`)
-                    axios.post('http://localhost:8081/post',{
+            
+                    axios.post('http://localhost:8082/InsertarInc',{
                         nombre: this.state.name,
                         dpi: this.state.dpi,
                         celular: this.state.celular,
                         inconformidad: this.state.inconformidad,
                         departamento: this.state.departamento,
-                        municipio: this.state.municipio
+                        municipio: this.state.municipio,
+                        estado: 'creado',
+                        descripcion: '',
+                        encargado: ''
                     })
                     .then(function (response) {
                         console.log(response);
@@ -525,7 +530,7 @@ class Formulario extends React.Component {
                 </div>
                 </div>
                 <hr></hr>
-                <button type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar</button>      
+                <a href="#/incidente" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar</a>      
             </form>
         </main>
     </>

@@ -4,11 +4,26 @@ import NavBar from '../NavBar/NavBar';
 import Formulario from '../Formularios/Editar_Formulario';
 
 class Editar extends React.Component {
+
+  /*constructor(){
+    //super()
+
+  }*/
+
+  componentDidMount() {
+    const { dpi } = this.props.match.params;
+    console.log(this.props.match.params)
+    
+  }
+
+
+  
+
   render() {
     return (
       <div>
         <NavBar/>
-        <Formulario/>
+        <Formulario {...this.props}/>
       </div>
     );
   }
