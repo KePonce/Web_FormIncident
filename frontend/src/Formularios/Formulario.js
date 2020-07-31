@@ -35,7 +35,7 @@ class Formulario extends React.Component {
                         encargado: ''
                     })
                     .then(function (response) {
-                        console.log(response);
+                        alert(response.data);
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -519,7 +519,7 @@ class Formulario extends React.Component {
                 </div>
                 </div>
                 <hr></hr>
-                <a href="#/incidente" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar</a>      
+                <a href="#/incidente" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar Reporte</a>      
             </form>
         </main>
     </>

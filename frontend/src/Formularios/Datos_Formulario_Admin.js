@@ -15,11 +15,11 @@ class Datos_Formulario extends Component {
             
     axios.post('http://localhost:8082/ActualizarEstado/'+dpi,{
         id: dpi,
-        estado: "Terminar",
+        estado: "Resuelto",
         
     })
     .then(function (response) {
-        console.log(response);
+        alert(response);
     })
     .catch(function (error) {
         console.log(error);
@@ -33,6 +33,7 @@ class Datos_Formulario extends Component {
   async componentDidMount() {
     const formularios = (await axios.get('http://localhost:8082/incidente')).data;
     
+    
     this.setState({
       formularios
     });
@@ -41,8 +42,8 @@ class Datos_Formulario extends Component {
   render() {
     return (
       <div className="container">
-        <div><table className="table" >
-          <thead className="thead-dark">
+        <div><table class="table" >
+          <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Nombre</th>
@@ -53,7 +54,7 @@ class Datos_Formulario extends Component {
               <th scope="col">Municipio</th>
               <th scope="col">Estado</th>
               <th scope="col">Encargado</th>
-              <th scope="col">Terminar</th>
+              <th scope="col">Asignar</th>
               
             </tr>
           </thead>
@@ -73,7 +74,8 @@ class Datos_Formulario extends Component {
                       <td>{formulario.ESTADO}</td>
                       <td>{formulario.ENCARGADO}</td>
                       
-                      <td><a href="#/formulario" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Terminar Caso</a></td>
+                      <td><Link class="btn btn-outline-info "  to={"/incidente/"+formulario.DPI} >Asignar</Link></td>
+                      
                     </tr>
               ))
             }

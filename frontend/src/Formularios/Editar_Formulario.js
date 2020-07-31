@@ -74,16 +74,16 @@ class Editar_Formulario extends Component {
                     <div  className="grupo">
                     <select  id="depto" name="Usuario" value={this.state.Usuario} onChange={this.handleChange} required>
                             <option ></option>
-                            <option>Usuario1</option>
-                            <option>Usuario2</option>
-                            <option>Usuario3</option>
+                            <option>VisaNet</option>
+                            <option>Informatica</option>
+                            <option>MIDES</option>
                             
                         </select><span className="barra"></span>
                     <label>Usuario</label>
                     </div>
                 </div>
                 
-                <a href="#/incidente" onClick={() => this.onSubmit(form.DPI)} className="btn btn-info btn-block">Editar</a>
+                <a href="#/incidente" onClick={() => this.onSubmit(form.DPI)} className="btn btn-info btn-block">Asignar</a>
           </div>
 
 
@@ -95,6 +95,7 @@ class Editar_Formulario extends Component {
       </div>
     </div>
     ) : <p>Loading ...</p>;
+      
   }
 }
 

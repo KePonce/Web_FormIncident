@@ -91,19 +91,55 @@ app.post('/ActualizarInc/:dpi', (req, res) => {
     console.log("datos actualizados")
   })
 });
+
+app.post('/ActualizarEstado/:dpi', (req, res) => {
+  let emp = req.body;
+  mysqlConnection.query('UPDATE incidente SET ESTADO = ? WHERE DPI = ?', [emp.estado,emp.id], function(err,data){
+    if(err)
+    console.log(err);
+    else
+    console.log("datos actualizados")
+  })
+});
 // insert a new incidente
 
   app.post('/InsertarInc', (req, res) => {
     console.log("entro");
     let emp = req.body;
     console.log(emp);
-    var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DESCRIPICION_RESUELTO, ENCARGADO)  VALUES (?,?,?,?,?,?,?,?,?)';
-    mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio,emp.estado, emp.descripcion, emp.encargado], function(err, data){
-      if(err)
-      console.log(err);
-      else
-      console.log("datos insertados")
+
+    mysqlConnection.query('SELECT * FROM incidente WHERE DPI = ?', [emp.dpi], (err, rows, fields)=>{
+      if(!err)
+      {
+        if(rows.length == 0){
+          var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DESCRIPICION_RESUELTO, ENCARGADO)  VALUES (?,?,?,?,?,?,?,?,?)';
+          mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio,emp.estado, emp.descripcion, emp.encargado], function(err, data){
+            if(err)
+            console.log(err);
+            else
+            console.log("datos insertados")
+          })
+        }else{
+          if(rows[0].ESTADO == 'terminado'){
+            var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DESCRIPICION_RESUELTO, ENCARGADO)  VALUES (?,?,?,?,?,?,?,?,?)';
+            mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio,emp.estado, emp.descripcion, emp.encargado], function(err, data){
+            if(err)
+            console.log(err);
+            else
+            console.log("datos insertados")
+          })
+          }else{
+            res.send("Ya existe un caso con este dpi")
+          }
+          
+        }
+    }
+      else{
+      console.log(err)
+    }
     })
+    
+    
   });
 
 // start the server
