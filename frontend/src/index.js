@@ -4,6 +4,8 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Inicio from './Inicio/Inicio';
+import InicioAdmin from './Formularios/Datos_Formulario_Admin';
+import InicioWorker from './Formularios/Datos_Formulario_Worker';
 import EditarInc from './Inicio/Editar'
 import Login from './Formularios/Login'
 import * as serviceWorker from './serviceWorker';
@@ -16,6 +18,8 @@ ReactDOM.render(
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/formulario' component={App} />
                   <Route exact path='/incidente' component={Inicio} />
+                  <Route exact path='/incidenteAdmin' component={InicioAdmin} />
+                  <Route exact path='/incidenteWorker' component={InicioWorker} />
                   <Route path="/incidente/:dpi" component={EditarInc} />
               </Switch>
           </div>
