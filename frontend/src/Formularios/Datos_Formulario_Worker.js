@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-class Datos_Formulario extends Component {
+class Datos_Formulario_Worker extends Component {
   constructor(props) {
     super(props);
 
@@ -74,7 +74,7 @@ class Datos_Formulario extends Component {
                       <td>{formulario.ESTADO}</td>
                       <td>{formulario.ENCARGADO}</td>
                       
-                      <td><a href="#/incidente" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Resolver</a></td>
+                      <td><Link class="btn btn-outline-info "  to={"/resolverincidente/"+formulario.DPI} >Resolver</Link></td>
                     </tr>
               ))
             }
@@ -86,4 +86,4 @@ class Datos_Formulario extends Component {
   }
 }
 
-export default Datos_Formulario;
+export default Datos_Formulario_Worker;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-class Datos_Formulario extends Component {
+class Datos_Formulario_Admin extends Component {
   constructor(props) {
     super(props);
 
@@ -87,4 +87,4 @@ class Datos_Formulario extends Component {
   }
 }
 
-export default Datos_Formulario;
+export default Datos_Formulario_Admin;
