@@ -10,7 +10,7 @@ class Formulario extends React.Component {
     constructor(props) {
         super(props);
         this.state = {name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
-        estado:"", descripcion:"", encargado:""
+        estado:"", descripcion:"", encargado:"", direccion:""
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -32,7 +32,8 @@ class Formulario extends React.Component {
                         municipio: this.state.municipio,
                         estado: 'creado',
                         descripcion: '',
-                        encargado: ''
+                        encargado: '',
+                        direccion: this.state.direccion
                     })
                     .then(function (response) {
                         alert(response.data);
@@ -44,6 +45,15 @@ class Formulario extends React.Component {
 
   render() {
     let selectt1;
+    let direcinput;
+            if (this.state.inconformidad==="Código no válido banco/cajero" || 
+            this.state.inconformidad==="Cajero no dio dinero" || 
+            this.state.inconformidad==="Usuario bloqueado banco/cajero" ){
+                direcinput= <div>
+                        <input type="text" name="direccion" value={this.state.direccion} onChange={this.handleChange} id="direccion" required></input><span className="barra"></span>
+                            <label>Dirección*:</label>
+                    </div>;
+        }
         if (this.state.departamento) {
         if (this.state.departamento==="Alta Verapaz") {
             selectt1 =<div>                   
@@ -622,7 +632,7 @@ class Formulario extends React.Component {
                 </div>
                 <hr></hr>
                 <div className="row">
-                <div className="col-sm-8"  >
+                <div className="col-sm-6"  >
                     <div  className="grupo">
                     <select id="incident" name="inconformidad" value={this.state.inconformidad} onChange={this.handleChange} required>
                             <option ></option>
@@ -644,6 +654,11 @@ class Formulario extends React.Component {
                             <option>No le ha llegado el recibo de luz con el codigo bono familia</option>
                         </select><span className="barra"></span>
                     <label>Inconformidad*</label>
+                    </div>
+                </div>
+                <div className="col-sm-6">
+                    <div className="grupo">
+                        {direcinput}
                     </div>
                 </div>
                 </div>

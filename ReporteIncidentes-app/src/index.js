@@ -122,8 +122,9 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
       if(!err)
       {
         if(rows.length == 0){
-          var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DESCRIPICION_RESUELTO, ENCARGADO)  VALUES (?,?,?,?,?,?,?,?,?)';
-          mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio,emp.estado, emp.descripcion, emp.encargado], function(err, data){
+          var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DESCRIPICION_RESUELTO, ENCARGADO, DIRECCION)  VALUES (?,?,?,?,?,?,?,?,?,?)';
+          mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.descripcion, emp.encargado, emp.direccion], function(err, data){
+            console.log(emp.direccion);
             if(err)
             console.log(err);
             else
@@ -131,8 +132,8 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
           })
         }else{
           if(rows[0].ESTADO == 'terminado'){
-            var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DESCRIPICION_RESUELTO, ENCARGADO)  VALUES (?,?,?,?,?,?,?,?,?)';
-            mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio,emp.estado, emp.descripcion, emp.encargado], function(err, data){
+            var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DESCRIPICION_RESUELTO, ENCARGADO, DIRECCION)  VALUES (?,?,?,?,?,?,?,?,?,?)';
+            mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio,emp.estado, emp.descripcion, emp.encargado, emp.direccion], function(err, data){
             if(err)
             console.log(err);
             else

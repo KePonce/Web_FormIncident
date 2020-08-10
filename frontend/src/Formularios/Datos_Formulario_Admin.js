@@ -4,19 +4,15 @@ import { Link } from "react-router-dom";
 class Datos_Formulario_Admin extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       formularios: null,
     };
   }
 
   onSubmit = (dpi) => {
-          
-            
     axios.post('http://localhost:8082/ActualizarEstado/'+dpi,{
         id: dpi,
         estado: "Resuelto",
-        
     })
     .then(function (response) {
         alert(response);
@@ -24,16 +20,11 @@ class Datos_Formulario_Admin extends Component {
     .catch(function (error) {
         console.log(error);
     });
-
 }
-
-
 
   //Conexion con el backend en puerto 8081
   async componentDidMount() {
     const formularios = (await axios.get('http://localhost:8082/incidente')).data;
-    
-    
     this.setState({
       formularios
     });
@@ -55,7 +46,6 @@ class Datos_Formulario_Admin extends Component {
               <th scope="col">Estado</th>
               <th scope="col">Encargado</th>
               <th scope="col">Asignar</th>
-              
             </tr>
           </thead>
           <tbody>
@@ -73,9 +63,7 @@ class Datos_Formulario_Admin extends Component {
                       <td>{formulario.MUNICIPIO}</td>
                       <td>{formulario.ESTADO}</td>
                       <td>{formulario.ENCARGADO}</td>
-                      
                       <td><Link class="btn btn-outline-info "  to={"/incidente/"+formulario.DPI} >Asignar</Link></td>
-                      
                     </tr>
               ))
             }
