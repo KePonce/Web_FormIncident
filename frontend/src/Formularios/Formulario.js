@@ -30,9 +30,9 @@ class Formulario extends React.Component {
                         inconformidad: this.state.inconformidad,
                         departamento: this.state.departamento,
                         municipio: this.state.municipio,
-                        estado: 'creado',
+                        estado: this.state.estado,
                         descripcion: '',
-                        encargado: '',
+                        encargado: this.state.encargado,
                         direccion: this.state.direccion
                     })
                     .then(function (response) {
@@ -46,7 +46,27 @@ class Formulario extends React.Component {
   render() {
     let selectt1;
     let direcinput;
-            if (this.state.inconformidad==="Código no válido banco/cajero" || 
+        if(this.state.inconformidad==="No ha llegado código/token" || this.state.inconformidad==="Código/token incompleto" ||
+           this.state.inconformidad==="Mensaje equivocado de exclusión" || this.state.inconformidad==="Código Borroso en recibo"){
+            this.state.encargado="Informatica"
+            this.state.estado="Asignado"
+        }
+        if(this.state.inconformidad==="DPI Invalido" || this.state.inconformidad==="DPI ya ingresado" ||
+           this.state.inconformidad==="Ingresó Celular erróneo" || this.state.inconformidad==="Ingresó DPI de un difunto"){
+            this.state.encargado="Renap"
+            this.state.estado="Asignado"
+        }
+        if(this.state.inconformidad==="Robo de factura / código familia" || this.state.inconformidad==="No le ha llegado el recibo de luz con el codigo bono familia" ||
+           this.state.inconformidad==="Celular Perdido / Robado despues de registro"){
+            this.state.encargado="Mides"
+            this.state.estado="Asignado"
+        }
+        if(this.state.inconformidad==="Código no válido banco/cajero" || this.state.inconformidad==="Cajero no dio dinero" ||
+           this.state.inconformidad==="Usuario bloqueado banco/cajero" || this.state.inconformidad==="Saldo no coincide con lo gastado"){
+            this.state.encargado="VisaNet"
+            this.state.estado="Asignado"
+        }
+        if (this.state.inconformidad==="Código no válido banco/cajero" || 
             this.state.inconformidad==="Cajero no dio dinero" || 
             this.state.inconformidad==="Usuario bloqueado banco/cajero" ){
                 direcinput= <div>
