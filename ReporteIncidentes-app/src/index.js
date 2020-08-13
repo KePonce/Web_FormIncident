@@ -52,6 +52,16 @@ app.get('/incidente', (req, res) => {
   });
 });
 
+// retrieve all operador
+app.get('/operador', (req, res) => {
+  mysqlConnection.query('SELECT * FROM operador', (err, rows, fields)=>{
+    if(!err)
+    res.send(rows);
+    else
+    console.log(err)
+  });
+});
+
 
 // get a specific incidente
 app.get('/incidente/:dpi', (req, res) => {
@@ -111,8 +121,8 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
     console.log("datos actualizados")
   })
 });
-// insert a new incidente
 
+// insert a new incidente
   app.post('/InsertarInc', (req, res) => {
     console.log("entro");
     let emp = req.body;
@@ -152,7 +162,7 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
     
   });
 
-
+//Ingresar nueva inconformidad
   app.post('/NuevaInconformidad', (req, res) => {
     console.log("inconformidad");
     let emp = req.body;
