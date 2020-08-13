@@ -79,7 +79,7 @@ class Inconformidad_Formulario extends React.Component {
                         {
                         this.state.inconformidades && this.state.inconformidades.map(inconformidades => (
                             <option>
-                                {inconformidades.rol}
+                                {inconformidades.usuario}
                             </option>    
                         ))
                         }
