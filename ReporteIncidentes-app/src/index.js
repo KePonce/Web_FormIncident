@@ -142,7 +142,34 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
           }else{
             res.send("Ya existe un caso con este dpi")
           }
-          
+        }
+    }
+      else{
+      console.log(err)
+    }
+    })
+    
+    
+  });
+
+
+  app.post('/NuevaInconformidad', (req, res) => {
+    console.log("inconformidad");
+    let emp = req.body;
+    console.log(emp);
+
+    mysqlConnection.query('SELECT * FROM inconformidad WHERE Nombre_Inconformidad = ?', [emp.dpi], (err, rows, fields)=>{
+      if(!err)
+      {
+        if(rows.length == 0){
+          var sql = 'INSERT INTO inconformidad(Nombre_Inconformidad, Encargado, Respuesta, Estado, operador_usuario)  VALUES (?,?,?,?,?)';
+          mysqlConnection.query(sql, [emp.nombre_inconformidad, emp.encargado, emp.respuesta, emp.estado, emp.operador], function(err, data){
+            console.log(emp.direccion);
+            if(err)
+            console.log(err);
+            else
+            console.log("Inconformidad insertada")
+          })
         }
     }
       else{

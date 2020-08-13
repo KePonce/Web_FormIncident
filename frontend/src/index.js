@@ -8,6 +8,7 @@ import InicioAdmin from './Formularios/Datos_Formulario_Admin';
 import InicioWorker from './Formularios/Datos_Formulario_Worker';
 import EditarInc from './Inicio/Editar'
 import ResolveInc from './Inicio/ResolverWorker'
+import IngInconf from './Inicio/IngresarInconformidad'
 import Login from './Formularios/Login'
 import * as serviceWorker from './serviceWorker';
 
@@ -23,6 +24,7 @@ ReactDOM.render(
                   <Route exact path='/incidenteWorker' component={InicioWorker} />
                   <Route path="/incidente/:dpi" component={EditarInc} />
                   <Route path="/resolverincidente/:dpi" component={ResolveInc} />
+                  <Route path="/nuevainconformidad" component={IngInconf} />
               </Switch>
           </div>
       </Router>,
