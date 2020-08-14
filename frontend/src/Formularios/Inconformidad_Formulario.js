@@ -29,6 +29,10 @@ class Inconformidad_Formulario extends React.Component {
 
       //Button function to post incidents
       onSubmit = () => {
+
+                    if(this.state.respuesta===null){
+                        this.state.respuesta=''
+                    }
                     //Ingresar nueva inconformidad
                     axios.post('http://localhost:8082/NuevaInconformidad',{
                         nombre_inconformidad: this.state.inconformidad,
@@ -75,6 +79,7 @@ class Inconformidad_Formulario extends React.Component {
                 </div>
                 <div className="col-md-6">
                     <select id="Encargado" name="operador" value={this.state.operador} onChange={this.handleChange}  required>
+                        <option></option>
                         {this.state.inconformidades === null}
                         {
                         this.state.inconformidades && this.state.inconformidades.map(inconformidades => (
@@ -88,7 +93,7 @@ class Inconformidad_Formulario extends React.Component {
                 </div>
                 </div>
                 <hr></hr>
-                <a href="#/incidente" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Guardar Inconformidad</a>      
+                <a href="#/nuevainconformidad" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Guardar Inconformidad</a>      
             </form>
         </main>
     </>

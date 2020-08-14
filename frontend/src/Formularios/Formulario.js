@@ -21,6 +21,13 @@ class Formulario extends React.Component {
         this.setState({[event.target.name]: event.target.value});
       }
 
+      async componentDidMount() {
+        const inconformidades = (await axios.get('http://localhost:8082/inconformidad')).data;
+        this.setState({
+            inconformidades
+        });
+      }
+
       //Button function to post incidents
       onSubmit = () => {
                     axios.post('http://localhost:8082/InsertarInc',{
@@ -47,7 +54,7 @@ class Formulario extends React.Component {
     let selectt1;
     let direcinput;
         if(this.state.inconformidad==="No ha llegado código/token" || this.state.inconformidad==="Código/token incompleto" ||
-           this.state.inconformidad==="Mensaje equivocado de exclusión" || this.state.inconformidad==="Código Borroso en recibo"){
+           this.state.inconformidad==="Mensaje equivocado de exclusión" || this.state.inconformidad==="Ingresó DPI de un difunto"){
             this.state.encargado="Informatica"
             this.state.estado="Asignado"
         }
@@ -655,23 +662,15 @@ class Formulario extends React.Component {
                 <div className="col-sm-6"  >
                     <div  className="grupo">
                     <select id="incident" name="inconformidad" value={this.state.inconformidad} onChange={this.handleChange} required>
-                            <option ></option>
-                            <option>Cuenta no tiene Fondos</option>
-                            <option>Saldo no coincide con lo gastado</option>
-                            <option>Código no válido banco/cajero</option>
-                            <option>Cajero no dio dinero</option>
-                            <option>Usuario bloqueado banco/cajero</option>
-                            <option>Código/token incompleto</option>
-                            <option>Mensaje equivocado de exclusión</option>
-                            <option>DPI Invalido</option>
-                            <option>DPI  ya ingresado</option>
-                            <option>No ha llegado código/token</option>
-                            <option>Ingresó Celular erróneo</option>
-                            <option>Ingresó DPI de un difunto</option>
-                            <option>Código Borroso en recibo</option>
-                            <option>Robo de factura / código familia</option>
-                            <option>Celular Perdido / Robado despues de registro</option>
-                            <option>No le ha llegado el recibo de luz con el codigo bono familia</option>
+                        <option ></option>
+                        {this.state.inconformidades === null}
+                        {
+                        this.state.inconformidades && this.state.inconformidades.map(inconformidades => (
+                            <option>
+                                {inconformidades.Nombre_Inconformidad}
+                            </option>    
+                        ))
+                        }
                         </select><span className="barra"></span>
                     <label>Inconformidad*</label>
                     </div>
