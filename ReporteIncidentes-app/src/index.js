@@ -112,6 +112,16 @@ app.post('/ActualizarDescripcion/:dpi', (req, res) => {
   })
 });
 
+app.post('/ResolverInc/:dpi', (req, res) => {
+  let emp = req.body;
+  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, DESCRIPICION_RESUELTO = ? WHERE DPI = ?', [emp.estado,emp.desc,emp.id], function(err,data){
+    if(err)
+    console.log(err);
+    else
+    console.log("datos actualizados")
+  })
+});
+
 app.post('/ActualizarEstado/:dpi', (req, res) => {
   let emp = req.body;
   mysqlConnection.query('UPDATE incidente SET ESTADO = ? WHERE DPI = ?', [emp.estado,emp.id], function(err,data){

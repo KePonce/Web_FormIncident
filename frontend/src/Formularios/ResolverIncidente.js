@@ -22,10 +22,10 @@ class Editar_Formulario extends Component {
 
   onSubmit = (dpi) => {
 
-    axios.post('http://localhost:8082/ActualizarInc/'+dpi,{
-        encargado: this.state.Usuario,
+    axios.post('http://localhost:8082/ResolverInc/'+dpi,{
+        desc: this.state.Descripcion,
         id: dpi,
-        estado: "asignado",
+        estado: "Resuelto",
         
     })
     .then(function (response) {
@@ -84,7 +84,7 @@ class Editar_Formulario extends Component {
                 
                 
                 <div className="jumbotron col-12"> 
-                <a href="#/incidente" onClick={() => this.onSubmit(form.DPI)} className="btn btn-info btn-block">Asignar</a>
+                <a href="#/incidenteWorker" onClick={() => this.onSubmit(form.DPI)} className="btn btn-info btn-block">Resolver</a>
                 </div>
           </div>
 
