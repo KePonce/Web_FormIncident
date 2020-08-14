@@ -9,7 +9,7 @@ export const register = newUser => {
         password: newUser.password
     })
     .then(res => {
-        console.log("Registered")
+        console.log("Registrado")
     })
 }
 

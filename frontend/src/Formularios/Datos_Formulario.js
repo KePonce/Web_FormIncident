@@ -44,7 +44,6 @@ class Datos_Formulario extends Component {
         <div><table className="table" >
           <thead className="thead-dark">
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Nombre</th>
               <th scope="col">DPI</th>
               <th scope="col">Celular</th>
@@ -54,7 +53,6 @@ class Datos_Formulario extends Component {
               <th scope="col">Estado</th>
               <th scope="col">Encargado</th>
               <th scope="col">Terminar</th>
-              
             </tr>
           </thead>
           <tbody>
@@ -63,7 +61,6 @@ class Datos_Formulario extends Component {
               this.state.formularios && this.state.formularios.map(formulario => (
                     <tr>
                       {console.log(formulario)}
-                      <th>{formulario.IDINCIDENT}</th>
                       <td>{formulario.NOMBRE_COMPLETO}</td>
                       <td>{formulario.DPI}</td>
                       <td>{formulario.CELULAR}</td>
@@ -71,8 +68,7 @@ class Datos_Formulario extends Component {
                       <td>{formulario.DEPARTAMENTO}</td>
                       <td>{formulario.MUNICIPIO}</td>
                       <td>{formulario.ESTADO}</td>
-                      <td>{formulario.ENCARGADO}</td>
-                      
+                      <td>{formulario.operador_usuario}</td>
                       <td><a href="#/formulario" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Terminar Caso</a></td>
                     </tr>
               ))

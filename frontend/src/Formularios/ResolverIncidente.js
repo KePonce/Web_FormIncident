@@ -21,12 +21,10 @@ class Editar_Formulario extends Component {
   }
 
   onSubmit = (dpi) => {
-
     axios.post('http://localhost:8082/ResolverInc/'+dpi,{
         desc: this.state.Descripcion,
         id: dpi,
-        estado: "Resuelto",
-        
+        estado: "Resuelto",   
     })
     .then(function (response) {
         alert(response);
@@ -34,8 +32,7 @@ class Editar_Formulario extends Component {
     .catch(function (error) {
         console.log(error);
     });
-
-}
+  }
 
    async componentDidMount() {
     let userId = this.props.match.params.dpi;
@@ -51,16 +48,11 @@ class Editar_Formulario extends Component {
   render() {
     const bandera = true;
     return bandera == true ? (
-      
       <div className="container">
       <div className="row">
         <div className="jumbotron col-12">
-       
-        {
-              this.state.formulario && this.state.formulario.map(form => (
+        {this.state.formulario && this.state.formulario.map(form => (
           <div>
-
-          
                 <h6>{"DPI: " + form.DPI}</h6>
                 <h6>{"Nombre: " + form.NOMBRE_COMPLETO}</h6>
                 <h6>{"Celular: " + form.CELULAR}</h6>
@@ -68,36 +60,19 @@ class Editar_Formulario extends Component {
                 <h6>{"Departamento: " + form.DEPARTAMENTO}</h6>
                 <h6>{"Municipio: " + form.MUNICIPIO}</h6>
                 <h6>{"Estatus: " + form.ESTADO}</h6>
-                
-                
-                  <TextField
-                  id="outlined-multiline-flexible"
-                  label="Descripcion"
-                  name="Descripcion"
-                  fullWidth
-                  multiline
-                  rowsMax={5}
-                  value={this.state.Descripcion}
-                  onChange={this.handleChange}
-                  variant="outlined"
-                  />
-                
-                
+                <TextField id="outlined-multiline-flexible" label="Descripcion" name="Descripcion"
+                  fullWidth multiline rowsMax={5} value={this.state.Descripcion}
+                  onChange={this.handleChange} variant="outlined"/>
                 <div className="jumbotron col-12"> 
                 <a href="#/incidenteWorker" onClick={() => this.onSubmit(form.DPI)} className="btn btn-info btn-block">Resolver</a>
                 </div>
           </div>
-
-
-             ))
-            }
-
-         
+          ))
+        }
         </div>
       </div>
     </div>
-    ) : <p>Loading ...</p>;
-      
+    ) : <p>Cargando ...</p>;
   }
 }
 

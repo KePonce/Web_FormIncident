@@ -47,6 +47,9 @@ class Inconformidad_Formulario extends React.Component {
                     .catch(function (error) {
                         console.log(error);
                     });
+                    this.setState({
+                        inconformidad:'', respuesta:'', estado:'', operador:'', inconformidades:null
+                    });
                 }
 
   render() {

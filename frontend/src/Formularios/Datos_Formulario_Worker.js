@@ -45,7 +45,6 @@ class Datos_Formulario_Worker extends Component {
         <div><table class="table" >
           <thead class="thead-dark">
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Nombre</th>
               <th scope="col">DPI</th>
               <th scope="col">Celular</th>
@@ -53,8 +52,7 @@ class Datos_Formulario_Worker extends Component {
               <th scope="col">Departamento</th>
               <th scope="col">Municipio</th>
               <th scope="col">Estado</th>
-              <th scope="col">Encargado</th>
-              
+              <th scope="col">Direccion</th>
               <th scope="col">Resolver</th>
             </tr>
           </thead>
@@ -64,7 +62,6 @@ class Datos_Formulario_Worker extends Component {
               this.state.formularios && this.state.formularios.map(formulario => (
                     <tr>
                       {console.log(formulario)}
-                      <th>{formulario.IDINCIDENT}</th>
                       <td>{formulario.NOMBRE_COMPLETO}</td>
                       <td>{formulario.DPI}</td>
                       <td>{formulario.CELULAR}</td>
@@ -72,8 +69,7 @@ class Datos_Formulario_Worker extends Component {
                       <td>{formulario.DEPARTAMENTO}</td>
                       <td>{formulario.MUNICIPIO}</td>
                       <td>{formulario.ESTADO}</td>
-                      <td>{formulario.ENCARGADO}</td>
-                      
+                      <td>{formulario.DIRECCION}</td>
                       <td><Link class="btn btn-outline-info "  to={"/resolverincidente/"+formulario.DPI} >Resolver</Link></td>
                     </tr>
               ))

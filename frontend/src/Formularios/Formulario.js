@@ -48,6 +48,10 @@ class Formulario extends React.Component {
                     .catch(function (error) {
                         console.log(error);
                     });
+                    this.setState({
+                        name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
+                        estado:"", descripcion:"", encargado:"", direccion:""
+                    });
                 }
 
   render() {
@@ -682,7 +686,7 @@ class Formulario extends React.Component {
                 </div>
                 </div>
                 <hr></hr>
-                <a href="#/incidente" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar Reporte</a>      
+                <a href="#/formulario" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar Reporte</a>      
             </form>
         </main>
     </>

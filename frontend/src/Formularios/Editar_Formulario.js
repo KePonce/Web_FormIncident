@@ -4,29 +4,24 @@ import axios from 'axios';
 class Editar_Formulario extends Component {
   constructor(props) {
     super(props);
-    console.log("saludo",this.props);
     this.state = {
       formulario: null,
       Usuario: "",
       Dpi: "",
       Estado: ""
-
     };
     this.handleChange = this.handleChange.bind(this);
   }
-
   
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
   }
 
   onSubmit = (dpi) => {
-
     axios.post('http://localhost:8082/ActualizarInc/'+dpi,{
         encargado: this.state.Usuario,
         id: dpi,
         estado: "asignado",
-        
     })
     .then(function (response) {
         alert(response);
@@ -34,8 +29,7 @@ class Editar_Formulario extends Component {
     .catch(function (error) {
         console.log(error);
     });
-
-}
+  }
 
    async componentDidMount() {
     let userId = this.props.match.params.dpi;
@@ -50,17 +44,12 @@ class Editar_Formulario extends Component {
 
   render() {
     const bandera = true;
-    return bandera == true ? (
-      
+    return bandera === true ? (
       <div className="container">
       <div className="row">
         <div className="jumbotron col-12">
-       
-        {
-              this.state.formulario && this.state.formulario.map(form => (
+        {this.state.formulario && this.state.formulario.map(form => (
           <div>
-
-          
                 <h6>{"DPI: " + form.DPI}</h6>
                 <h6>{"Nombre: " + form.NOMBRE_COMPLETO}</h6>
                 <h6>{"Celular: " + form.CELULAR}</h6>
@@ -68,8 +57,6 @@ class Editar_Formulario extends Component {
                 <h6>{"Departamento: " + form.DEPARTAMENTO}</h6>
                 <h6>{"Municipio: " + form.MUNICIPIO}</h6>
                 <h6>{"Estatus: " + form.ESTADO}</h6>
-                
-                
                 <div className="col-sm-6"  >
                     <div  className="grupo">
                     <select  id="depto" name="Usuario" value={this.state.Usuario} onChange={this.handleChange} required>
@@ -77,25 +64,18 @@ class Editar_Formulario extends Component {
                             <option>VisaNet</option>
                             <option>Informatica</option>
                             <option>MIDES</option>
-                            
                         </select><span className="barra"></span>
                     <label>Usuario</label>
                     </div>
                 </div>
-                
                 <a href="#/incidente" onClick={() => this.onSubmit(form.DPI)} className="btn btn-info btn-block">Asignar</a>
           </div>
-
-
              ))
-            }
-
-         
+        }
         </div>
       </div>
     </div>
-    ) : <p>Loading ...</p>;
-      
+    ) : <p>Cargando...</p>;
   }
 }
 
