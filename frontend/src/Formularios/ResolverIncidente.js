@@ -65,7 +65,7 @@ class Editar_Formulario extends Component {
                   fullWidth multiline rowsMax={5} value={this.state.Descripcion}
                   onChange={this.handleChange} variant="outlined"/>
                 <div className="jumbotron col-12"> 
-                <a href="#/incidenteWorker" onClick={() => this.onSubmit(form.DPI)} className="btn btn-info btn-block">Resolver</a>
+                <a href="#/solucionarincidente" onClick={() => this.onSubmit(form.DPI)} className="btn btn-info btn-block">Resolver</a>
                 </div>
           </div>
           ))

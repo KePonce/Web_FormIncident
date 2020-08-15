@@ -32,7 +32,8 @@ class Datos_Formulario_Worker extends Component {
 
   //Conexion con el backend en puerto 8081
   async componentDidMount() {
-    const formularios = (await axios.get('http://localhost:8082/incidente')).data;
+    let ctrl = new controlador()
+    const formularios = (await axios.get('http://localhost:8082/IncidenteSolucionador/'+ctrl.usuario)).data;
     
     
     this.setState({

@@ -16,7 +16,7 @@ class Datos_Formulario extends Component {
             
     axios.post('http://localhost:8082/ActualizarEstado/'+dpi,{
         id: dpi,
-        estado: "Terminar",
+        estado: "Terminado",
         
     })
     .then(function (response) {
@@ -55,6 +55,7 @@ class Datos_Formulario extends Component {
                 <th scope="col">Municipio</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Encargado</th>
+                <th scope="col">Respuesta</th>
                 <th scope="col">Terminar</th>
               </tr>
             </thead>
@@ -72,6 +73,7 @@ class Datos_Formulario extends Component {
                         <td>{formulario.MUNICIPIO}</td>
                         <td>{formulario.ESTADO}</td>
                         <td>{formulario.operador_usuario}</td>
+                        <td>{formulario.RESPUESTA}</td>
                         <td><a href="#/formulario" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Terminar Caso</a></td>
                       </tr>
                 ))

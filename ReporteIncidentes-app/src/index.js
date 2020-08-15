@@ -51,6 +51,15 @@ app.get('/incidente', (req, res) => {
   });
 });
 
+app.get('/IncidenteSolucionador/:user', (req, res) => {
+  mysqlConnection.query('SELECT * FROM incidente WHERE operador_usuario = ?',[req.params.user], (err, rows, fields)=>{
+    if(!err){
+    res.send(rows);}
+    else
+    console.log(err)
+  });
+});
+
 // retrieve all operador
 app.get('/operador', (req, res) => {
   mysqlConnection.query('SELECT * FROM operador', (err, rows, fields)=>{
@@ -63,6 +72,7 @@ app.get('/operador', (req, res) => {
 
 // retrieve all inconformidad
 app.get('/inconformidad', (req, res) => {
+  
   mysqlConnection.query('SELECT * FROM inconformidad', (err, rows, fields)=>{
     if(!err){
     console.log(rows);
@@ -132,7 +142,7 @@ app.post('/ActualizarDescripcion/:dpi', (req, res) => {
 //Terminar Incidente
 app.post('/ResolverInc/:dpi', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, DESCRIPICION_RESUELTO = ? WHERE DPI = ?', [emp.estado,emp.desc,emp.id], function(err,data){
+  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, RESPUESTA = ? WHERE DPI = ?', [emp.estado,emp.desc,emp.id], function(err,data){
     if(err)
     console.log(err);
     else
@@ -160,7 +170,7 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
       if(!err)
       {
         if(rows.length == 0){
-          var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION, operador_usuario)  VALUES (?,?,?,?,?,?,?,?,(SELECT usuario from incidentesdb.operador where usuario=' +"'" + emp.encargado + "'" +'))';
+          var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION, operador_usuario)  VALUES (?,?,?,?,?,?,?,?,(SELECT operador_usuario from incidentesdb.inconformidad where Nombre_Inconformidad =' +"'" + emp.inconformidad + "'" +'))';
           mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
             if(err)
             console.log(err);

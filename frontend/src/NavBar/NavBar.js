@@ -34,7 +34,7 @@ function NavBar() {
     return (
       <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a className="navbar-brand" href="#/formulario">Incidentes Asignados</a>
+          <a className="navbar-brand" href="#/solucionarincidente">Incidentes Asignados</a>
           <a href="#/" onClick={() => onSubmit()} className="btn btn-info ">Salir</a>
         </nav>
       </>
@@ -44,7 +44,7 @@ function NavBar() {
     return (
       <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a className="navbar-brand" href="#/formulario">Debe de ingresar</a>
+          <a className="navbar-brand" href="#/">Debe de ingresar</a>
         </nav>
       </>
     );  
