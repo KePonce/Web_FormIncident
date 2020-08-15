@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import Datos_Formulario from '../Formularios/Inconformidad_Formulario';
 
-class DatosAdmin extends React.Component {
+class IngresarInconformidad extends React.Component {
   render() {
     return (
       <div>
@@ -14,4 +14,4 @@ class DatosAdmin extends React.Component {
   }
 }
 
-export default DatosAdmin;
+export default IngresarInconformidad;

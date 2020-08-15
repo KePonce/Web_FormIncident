@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
+import { controlador } from './controlador';
+
 class Editar_Formulario extends Component {
   constructor(props) {
     super(props);
-    console.log("saludo",this.props);
     this.state = {
       formulario: null,
       Usuario: "",
@@ -46,8 +47,8 @@ class Editar_Formulario extends Component {
   }
 
   render() {
-    const bandera = true;
-    return bandera == true ? (
+    const ctrl = new controlador()
+    return  ctrl.isLogin() ? (
       <div className="container">
       <div className="row">
         <div className="jumbotron col-12">

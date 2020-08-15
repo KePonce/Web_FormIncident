@@ -16,9 +16,6 @@ class Editar extends React.Component {
     
   }
 
-
-  
-
   render() {
     return (
       <div>

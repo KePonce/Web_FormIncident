@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import Datos_Formulario from '../Formularios/ResolverIncidente';
 
-class ResolverWorker extends React.Component {
+class ResolverIncidente extends React.Component {
   render() {
     return (
       <div>
@@ -14,4 +14,4 @@ class ResolverWorker extends React.Component {
   }
 }
 
-export default ResolverWorker;
+export default ResolverIncidente;

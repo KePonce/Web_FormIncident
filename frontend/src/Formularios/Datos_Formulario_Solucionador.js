@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { controlador } from './controlador'
-class Datos_Formulario extends Component {
+class Datos_Formulario_Worker extends Component {
   constructor(props) {
     super(props);
 
@@ -16,11 +16,11 @@ class Datos_Formulario extends Component {
             
     axios.post('http://localhost:8082/ActualizarEstado/'+dpi,{
         id: dpi,
-        estado: "Terminar",
+        estado: "Resuelto",
         
     })
     .then(function (response) {
-        console.log(response);
+        alert(response);
     })
     .catch(function (error) {
         console.log(error);
@@ -34,6 +34,7 @@ class Datos_Formulario extends Component {
   async componentDidMount() {
     const formularios = (await axios.get('http://localhost:8082/incidente')).data;
     
+    
     this.setState({
       formularios
     });
@@ -41,11 +42,12 @@ class Datos_Formulario extends Component {
 
   render() {
     let ctrl = new controlador()
-    if(ctrl.isLogin() && ctrl.isDigitador()){
+    console.log(ctrl.isLogin(), ctrl.isSolucionador())
+    if (ctrl.isLogin() && ctrl.isSolucionador()){
       return (
         <div className="container">
-          <div><table className="table" >
-            <thead className="thead-dark">
+          <div><table class="table" >
+            <thead class="thead-dark">
               <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">DPI</th>
@@ -54,8 +56,8 @@ class Datos_Formulario extends Component {
                 <th scope="col">Departamento</th>
                 <th scope="col">Municipio</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Encargado</th>
-                <th scope="col">Terminar</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Resolver</th>
               </tr>
             </thead>
             <tbody>
@@ -71,8 +73,8 @@ class Datos_Formulario extends Component {
                         <td>{formulario.DEPARTAMENTO}</td>
                         <td>{formulario.MUNICIPIO}</td>
                         <td>{formulario.ESTADO}</td>
-                        <td>{formulario.operador_usuario}</td>
-                        <td><a href="#/formulario" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Terminar Caso</a></td>
+                        <td>{formulario.DIRECCION}</td>
+                        <td><Link class="btn btn-outline-info "  to={"/resolverincidente/"+formulario.DPI} >Resolver</Link></td>
                       </tr>
                 ))
               }
@@ -81,11 +83,11 @@ class Datos_Formulario extends Component {
           </div>
         </div>
       )
-    }else{
-      return (<p>Cargando incidentes  ...</p>);
     }
-     
+    else{
+      return(<p>Cargando...</p>)
+    }
   }
 }
 
-export default Datos_Formulario;
+export default Datos_Formulario_Worker;

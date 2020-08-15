@@ -592,7 +592,7 @@ class Formulario extends React.Component {
         }  
         } 
         let ctrl = new controlador()
-        return ctrl.isLogin() ? (
+        return ctrl.isDigitador() ? (
     <>
         <main role="main" className="flex-shrink-0 mt-5">
             <section className="text-center">

@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import Inicio from './Inicio/Inicio';
+import Inicio from './Inicio/PantallaAdmin';
 import InicioAdmin from './Inicio/DatosAdmin';
-import InicioWorker from './Formularios/Datos_Formulario_Worker';
+import Solucionar from './Inicio/PantallaSolucionador';
 import EditarInc from './Inicio/Editar'
-import ResolveInc from './Inicio/ResolverWorker'
+import ResolveInc from './Inicio/ResolverIncidente'
 import IngInconf from './Inicio/IngresarInconformidad'
 import Login from './Formularios/Login'
 import * as serviceWorker from './serviceWorker';
@@ -16,15 +16,19 @@ ReactDOM.render(
   <Router>
           <div>
               <Switch>
-                  {/*/Paginas*/}
-                  <Route exact path='/' component={Login} />
-                  <Route exact path='/formulario' component={App} />
-                  <Route exact path='/incidente' component={Inicio} />
-                  <Route exact path='/incidenteAdmin' component={InicioAdmin} />
-                  <Route exact path='/incidenteWorker' component={InicioWorker} />
-                  <Route path="/incidente/:dpi" component={EditarInc} />
-                  <Route path="/resolverincidente/:dpi" component={ResolveInc} />
-                  <Route path="/nuevainconformidad" component={IngInconf} />
+                {/*/Paginas*/}
+                <Route exact path='/' component={Login} />
+                {/*Digitador*/}
+                <Route exact path='/formulario' component={App} />
+                <Route exact path='/tablaincidentes' component={Inicio} />
+                {/*Pagina para Encargados de Incidentes */}
+                <Route exact path='/solucionarincidente' component={Solucionar} />
+                <Route path="/resolverincidente/:dpi" component={ResolveInc} />
+                {/*Pagina para Administrador */}
+                <Route exact path='/tablageneral' component={InicioAdmin} />
+                <Route path="/nuevainconformidad" component={IngInconf} />
+
+                <Route path="/tablaincidentes/:dpi" component={EditarInc} />
               </Switch>
           </div>
       </Router>,

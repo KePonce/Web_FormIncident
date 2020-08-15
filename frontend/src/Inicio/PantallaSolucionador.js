@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
-import Datos_Formulario from '../Formularios/Datos_Formulario';
+import Datos_Formulario from '../Formularios/Datos_Formulario_Solucionador';
 
-class Inicio extends React.Component {
+class PantallaSolucionador extends React.Component {
   render() {
     return (
       <div>
@@ -14,4 +14,4 @@ class Inicio extends React.Component {
   }
 }
 
-export default Inicio;
+export default PantallaSolucionador;

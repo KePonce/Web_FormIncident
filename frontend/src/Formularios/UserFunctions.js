@@ -13,17 +13,18 @@ export const register = newUser => {
     })
 }
 
+//Ruta principal depende del rol de usuario
 export function getPath(rol) {
     
     if(rol == 'solucionador'){
         console.log("---")
-        return '/incidenteWorker'
+        return '/solucionarincidente'
     }else if(rol == 'digitador'){
         console.log("--1")
         return '/formulario'
     }else if(rol == 'admin'){
         console.log("--2")
-        return '/incidenteAdmin'
+        return '/tablageneral'
     }
 
 }
