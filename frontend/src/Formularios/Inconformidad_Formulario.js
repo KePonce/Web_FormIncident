@@ -1,6 +1,7 @@
 import React from 'react';
 import estilos from './estilo.css';
 import axios from 'axios';
+import { controlador } from './controlador'
 // import Formulario_quejas from './formulario_quejas/Formulario_Quejas';
 
 //<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
@@ -53,9 +54,9 @@ class Inconformidad_Formulario extends React.Component {
                 }
 
   render() {
-      console.log("operadores" ,this.state.inconformidades)
-   return (
-    <>
+    let ctrl = new controlador()
+    return  ctrl.isLogin() ?(
+        <>
         <main role="main" className="flex-shrink-0 mt-5">
             <section className="text-center">
             <div className="container">
@@ -100,7 +101,7 @@ class Inconformidad_Formulario extends React.Component {
             </form>
         </main>
     </>
-   )  
+   ): <p>Cargando...</p>;
   }
 }
  

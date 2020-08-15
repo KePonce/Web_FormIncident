@@ -4,7 +4,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Inicio from './Inicio/Inicio';
-import InicioAdmin from './Formularios/Datos_Formulario_Admin';
+import InicioAdmin from './Inicio/DatosAdmin';
 import InicioWorker from './Formularios/Datos_Formulario_Worker';
 import EditarInc from './Inicio/Editar'
 import ResolveInc from './Inicio/ResolverWorker'

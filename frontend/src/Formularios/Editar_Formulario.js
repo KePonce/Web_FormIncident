@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { controlador } from './controlador'
 
 class Editar_Formulario extends Component {
   constructor(props) {
@@ -43,8 +44,8 @@ class Editar_Formulario extends Component {
   }
 
   render() {
-    const bandera = true;
-    return bandera === true ? (
+    let ctrl = new controlador()
+    return  ctrl.isLogin() ? (
       <div className="container">
       <div className="row">
         <div className="jumbotron col-12">

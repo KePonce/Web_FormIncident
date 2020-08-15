@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { controlador } from './controlador'
 class Datos_Formulario_Worker extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +41,8 @@ class Datos_Formulario_Worker extends Component {
   }
 
   render() {
-    return (
+    let ctrl = new controlador()
+    return ctrl.isLogin() ? (
       <div className="container">
         <div><table class="table" >
           <thead class="thead-dark">
@@ -78,7 +80,7 @@ class Datos_Formulario_Worker extends Component {
         </table>
         </div>
       </div>
-    )
+    ): <p>Cargando...</p>;
   }
 }
 

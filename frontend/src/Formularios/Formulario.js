@@ -1,6 +1,7 @@
 import React from 'react';
 import estilos from './estilo.css';
 import axios from 'axios';
+import { controlador } from './controlador'
 // import Formulario_quejas from './formulario_quejas/Formulario_Quejas';
 
 //<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
@@ -590,7 +591,8 @@ class Formulario extends React.Component {
                     </div>;
         }  
         } 
-   return (
+        let ctrl = new controlador()
+        return ctrl.isLogin() ? (
     <>
         <main role="main" className="flex-shrink-0 mt-5">
             <section className="text-center">
@@ -690,7 +692,7 @@ class Formulario extends React.Component {
             </form>
         </main>
     </>
-   )
+   ) : <p>Cargando...</p>;
    
   
   }

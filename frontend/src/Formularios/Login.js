@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {login} from './UserFunctions'
+import {login, getPath} from './UserFunctions'
+import { controlador } from './controlador'
 
 class Login extends Component {
     constructor() {
@@ -23,14 +24,21 @@ class Login extends Component {
             usuario: this.state.email,
             pass: this.state.password
         }
-        console.log("prueba")
+        
         login(user).then(res => {
-            if(res){
-                this.props.history.push(`/incidente`)
+            if(res.success === 23){
+                const ctrl = new controlador()
+                ctrl.setLogin(res.user, res.rol)
+                let path = getPath(res.rol);
+                this.props.history.push(path)
+            }else{
+                alert("El usuario o contraseña incorrectos")
             }
         })
     }
     render(){
+        const ctrl = new controlador()
+        ctrl.setLogout()
         return(
             <div className="container1">
                 <div className="container2">

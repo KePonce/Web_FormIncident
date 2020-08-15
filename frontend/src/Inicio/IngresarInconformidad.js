@@ -8,7 +8,7 @@ class DatosAdmin extends React.Component {
     return (
       <div>
         <NavBar/>
-        <Datos_Formulario/>
+        <Datos_Formulario {...this.props} />
       </div>
     );
   }

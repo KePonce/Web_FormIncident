@@ -13,8 +13,23 @@ export const register = newUser => {
     })
 }
 
+export function getPath(rol) {
+    
+    if(rol == 'solucionador'){
+        console.log("---")
+        return '/incidenteWorker'
+    }else if(rol == 'digitador'){
+        console.log("--1")
+        return '/formulario'
+    }else if(rol == 'admin'){
+        console.log("--2")
+        return '/incidenteAdmin'
+    }
+
+}
+
 export const login = user =>{
-    console.log(user.usuario)
+    
     return axios
     .post('http://localhost:8082/login', {
         usuario: user.usuario,

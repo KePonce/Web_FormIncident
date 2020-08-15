@@ -86,15 +86,23 @@ app.get('/incidente/:dpi', (req, res) => {
 app.post('/login', (req, res) => {
   let emp = req.body;
   console.log(emp)
-  mysqlConnection.query('SELECT * FROM usuario WHERE Usuario = ?', [emp.usuario], (err, rows, fields)=>{
+  mysqlConnection.query('SELECT * FROM operador WHERE Usuario = ?', [emp.usuario], (err, rows, fields)=>{
     if(!err && rows.length > 0){
       if(emp.pass==rows[0].pass) {
-        res.send(rows[0])
+        return res.json({
+          success: 23,
+          user: rows[0].usuario,
+          rol: rows[0].rol,
+          message: "access successfully"
+        });
       }
     }
     else{
     console.log("No existe el usuario")
-    console.log(err)
+      return res.json({
+        success: -1,
+        message: "access unsuccessfully"
+      });
     }
   })
 });
