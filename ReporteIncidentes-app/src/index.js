@@ -120,7 +120,7 @@ app.post('/login', (req, res) => {
 //Actualizar Incidente
 app.post('/ActualizarInc/:dpi', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, ENCARGADO = ? WHERE DPI = ?', [emp.estado,emp.encargado,emp.id], function(err,data){
+  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, FECHA_CREADO = ?, ENCARGADO = ? WHERE DPI = ?', [emp.estado,'NOW()',emp.encargado,emp.id], function(err,data){
     if(err)
     console.log(err);
     else
@@ -142,7 +142,7 @@ app.post('/ActualizarDescripcion/:dpi', (req, res) => {
 //Terminar Incidente
 app.post('/ResolverInc/:dpi', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, RESPUESTA = ? WHERE DPI = ?', [emp.estado,emp.desc,emp.id], function(err,data){
+  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, FECHA_RESUELTO = now(), RESPUESTA = ? WHERE DPI = ?', [emp.estado,emp.desc,emp.id], function(err,data){
     if(err)
     console.log(err);
     else
@@ -153,7 +153,7 @@ app.post('/ResolverInc/:dpi', (req, res) => {
 //Actualizar Estado
 app.post('/ActualizarEstado/:dpi', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('UPDATE incidente SET ESTADO = ? WHERE DPI = ?', [emp.estado,emp.id], function(err,data){
+  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, FECHA_TERMINADO = now() WHERE DPI = ?', [emp.estado,emp.id], function(err,data){
     if(err)
     console.log(err);
     else
@@ -166,11 +166,12 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
     console.log("entro");
     let emp = req.body;
     console.log(emp);
+    
     mysqlConnection.query('SELECT * FROM incidente WHERE DPI = ?', [emp.dpi], (err, rows, fields)=>{
       if(!err)
       {
         if(rows.length == 0){
-          var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION, operador_usuario)  VALUES (?,?,?,?,?,?,?,?,(SELECT operador_usuario from incidentesdb.inconformidad where Nombre_Inconformidad =' +"'" + emp.inconformidad + "'" +'))';
+          var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION,FECHA_CREADO, operador_usuario)  VALUES (?,?,?,?,?,?,?,?,now(),(SELECT operador_usuario from incidentesdb.inconformidad where Nombre_Inconformidad =' +"'" + emp.inconformidad + "'" +'))';
           mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
             if(err)
             console.log(err);
@@ -179,7 +180,7 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
           })
         }else{
           if(rows[0].ESTADO == 'terminado'){
-            var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION, operador_usuario)  VALUES (?,?,?,?,?,?,?,?,(SELECT usuario from incidentesdb.operador where usuario=' +"'" + emp.encargado + "'" +'))';
+            var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION, FECHA_CREADO,operador_usuario)  VALUES (?,?,?,?,?,?,?,?,NOW(),(SELECT usuario from incidentesdb.operador where usuario=' +"'" + emp.encargado + "'" +'))';
             mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
             if(err)
             console.log(err);

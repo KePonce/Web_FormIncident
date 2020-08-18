@@ -668,6 +668,7 @@ class Formulario extends React.Component {
                 </div>
                 </div>
                 <hr></hr>
+                
                 <a href="#/formulario" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar Reporte</a>      
             </form>
         </main>

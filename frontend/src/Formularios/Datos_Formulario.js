@@ -56,11 +56,14 @@ class Datos_Formulario extends Component {
                 <th scope="col">Estado</th>
                 <th scope="col">Encargado</th>
                 <th scope="col">Respuesta</th>
+                <th scope="col">Fecha_Creado</th>
+                <th scope="col">Fecha_Resuelto</th>
                 <th scope="col">Terminar</th>
               </tr>
             </thead>
             <tbody>
               {this.state.formularios === null && <p>Loading formularios...</p>}
+                
               {
                 this.state.formularios && this.state.formularios.map(formulario => (
                       <tr>
@@ -74,7 +77,10 @@ class Datos_Formulario extends Component {
                         <td>{formulario.ESTADO}</td>
                         <td>{formulario.operador_usuario}</td>
                         <td>{formulario.RESPUESTA}</td>
-                        <td><a href="#/formulario" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Terminar Caso</a></td>
+                        <td>{formulario.FECHA_CREADO}</td>
+                        <td>{formulario.FECHA_RESUELTO}</td>
+                        
+                <td>{formulario.ESTADO == "Resuelto"?<a href="#/formulario" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Terminar Caso</a>:formulario.ESTADO == "Terminado"?<p>Caso Finalizado</p>:<p>en proceso</p>}</td>
                       </tr>
                 ))
               }
