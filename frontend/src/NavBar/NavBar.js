@@ -43,8 +43,8 @@ function NavBar() {
   else{
     return (
       <>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a className="navbar-brand" href="#/">Debe de ingresar</a>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a href="#/" onClick={() => onSubmit()} className="btn btn-info ">Debe de ingresar</a>
         </nav>
       </>
     );  

@@ -40,11 +40,13 @@ class Datos_Formulario extends Component {
   }
 
   render() {
+    let prueba ="";
     let ctrl = new controlador()
     if(ctrl.isLogin() && ctrl.isDigitador()){
       return (
-        <div className="container">
-          <div><table className="table" >
+        
+          <div class="table-responsive">
+            <table className="table table-md" >
             <thead className="thead-dark">
               <tr>
                 <th scope="col">Nombre</th>
@@ -66,15 +68,16 @@ class Datos_Formulario extends Component {
                 
               {
                 this.state.formularios && this.state.formularios.map(formulario => (
+                  
                       <tr>
-                        {console.log(formulario)}
+                        
                         <td>{formulario.NOMBRE_COMPLETO}</td>
                         <td>{formulario.DPI}</td>
                         <td>{formulario.CELULAR}</td>
                         <td>{formulario.INCONFORMIDAD}</td>
                         <td>{formulario.DEPARTAMENTO}</td>
                         <td>{formulario.MUNICIPIO}</td>
-                        <td>{formulario.ESTADO}</td>
+                        <td class={formulario.ESTADO == "Resuelto"?"bg-primary":formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}>{formulario.ESTADO}</td>
                         <td>{formulario.operador_usuario}</td>
                         <td>{formulario.RESPUESTA}</td>
                         <td>{formulario.FECHA_CREADO}</td>
@@ -87,7 +90,7 @@ class Datos_Formulario extends Component {
             </tbody>
           </table>
           </div>
-        </div>
+        
       )
     }else{
       return (<p>Cargando incidentes  ...</p>);
