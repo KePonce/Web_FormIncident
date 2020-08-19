@@ -10,7 +10,7 @@ class Datos_Formulario extends Component {
       formularios: null,
     };
   }
-
+/*
   async getResueltos(){
     const formularios = (await axios.get('http://localhost:8082/incidenteresuelto')).data;
     this.setState({
@@ -34,7 +34,7 @@ class Datos_Formulario extends Component {
     });
     this.render()
   }
-
+*/
   onSubmit = (dpi) => {
           
             
@@ -69,16 +69,18 @@ class Datos_Formulario extends Component {
     let ctrl = new controlador()
     if(ctrl.isLogin() && ctrl.isDigitador()){
       return (
-        
-
-          <div class ="container-fluid">
-
+            /*
+            DETRO DEL CONTEINER
           <div class="btn-group col-sm-12">
           <button onClick={() => this.getAsignados()} className="btn btn-warning">Asignados</button>            
           <button onClick={() => this.getResueltos()} className="btn btn-success">Resueltos</button>            
           <button onClick={() => this.getTerminados()} className="btn btn-info">terminados</button>            
           <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
-          </div>
+          </div>  
+            */
+
+          <div class ="container-fluid">
+        
           
           
           <div class="table-responsive">

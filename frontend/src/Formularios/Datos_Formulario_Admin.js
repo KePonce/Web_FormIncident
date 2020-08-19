@@ -9,7 +9,7 @@ class Datos_Formulario_Admin extends Component {
       formularios: null,
     };
   }
-
+/*
   async getResueltos(){
     const formularios = (await axios.get('http://localhost:8082/incidenteresuelto')).data;
     this.setState({
@@ -34,7 +34,7 @@ class Datos_Formulario_Admin extends Component {
     this.render()
   }
 
-
+*/
   onSubmit = (dpi) => {
     axios.post('http://localhost:8082/ActualizarEstado/'+dpi,{
         id: dpi,
@@ -59,15 +59,18 @@ class Datos_Formulario_Admin extends Component {
   render() {
     let ctrl = new controlador()
     return ctrl.isLogin() ?(
-      
+      /*
+            DETRO DEL CONTEINER
+          <div class="btn-group col-sm-12">
+          <button onClick={() => this.getAsignados()} className="btn btn-warning">Asignados</button>            
+          <button onClick={() => this.getResueltos()} className="btn btn-success">Resueltos</button>            
+          <button onClick={() => this.getTerminados()} className="btn btn-info">terminados</button>            
+          <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
+          </div>  
+            */
       <div class ="container-fluid">
 
-        <div class="btn-group col-sm-12">
-        <button onClick={() => this.getAsignados()} className="btn btn-warning">Asignados</button>            
-        <button onClick={() => this.getResueltos()} className="btn btn-success">Resueltos</button>            
-        <button onClick={() => this.getTerminados()} className="btn btn-info">terminados</button>            
-        <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
-        </div>
+        
 
         <div class="table-responsive">
             <table className="table table-md" >

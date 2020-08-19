@@ -2,6 +2,7 @@ import React from 'react';
 import estilos from './estilo.css';
 import axios from 'axios';
 import { controlador } from './controlador'
+import FormDialog from './VentaEmergente';
 // import Formulario_quejas from './formulario_quejas/Formulario_Quejas';
 
 //<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
@@ -13,15 +14,21 @@ class Formulario extends React.Component {
         this.state = {name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
         estado:"", descripcion:"", encargado:"", direccion:""
         };
-    
+       
         this.handleChange = this.handleChange.bind(this);
+       
       }
     
+      
+
+      
+
       //Changes on inputs and selects
       handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
       }
 
+      
       async componentDidMount() {
         const inconformidades = (await axios.get('http://localhost:8082/inconformidad')).data;
         this.setState({
@@ -44,7 +51,8 @@ class Formulario extends React.Component {
                         direccion: this.state.direccion
                     })
                     .then(function (response) {
-                        //alert(response.data);
+                        alert("ya existe caso")
+                        return(<FormDialog/>)
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -56,6 +64,8 @@ class Formulario extends React.Component {
                 }
 
   render() {
+      
+    
     let selectt1;
     let direcinput;
         if (this.state.inconformidad==="Código no válido banco/cajero" || 
@@ -574,6 +584,7 @@ class Formulario extends React.Component {
         let ctrl = new controlador()
         return ctrl.isDigitador() ? (
     <>
+        
         <main role="main" className="flex-shrink-0 mt-5">
             <section className="text-center">
             <div className="container">

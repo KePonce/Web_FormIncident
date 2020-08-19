@@ -10,6 +10,10 @@ export class controlador {
         return this;
     }
 
+    getUser(){
+        return localStorage.getItem('usuario')
+    }
+
     isAdmin(){
         return localStorage.getItem("rol") === "admin"?true:false;
     }
@@ -33,14 +37,10 @@ export class controlador {
         localStorage.setItem('rol', rol );
         localStorage.setItem('log', 1 );
         
-        
-        
     }
 
     setLogout(){
         localStorage.clear();
-        
-        
     }
 
 }

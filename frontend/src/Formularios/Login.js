@@ -33,6 +33,10 @@ class Login extends Component {
                 this.props.history.push(path)
             }else{
                 alert("El usuario o contraseña incorrectos")
+                this.setState({
+                    email:"",
+                    password:''
+                })
             }
         })
     }

@@ -81,7 +81,8 @@ app.get('/incidenteterminado', (req, res) => {
 });
 
 app.get('/IncidenteSolucionador/:user', (req, res) => {
-  mysqlConnection.query(`SELECT * FROM incidente WHERE operador_usuario = ? AND ESTADO = 'Asignado'`,[req.params.user], (err, rows, fields)=>{
+  //mysqlConnection.query(`SELECT * FROM incidente WHERE operador_usuario = ? AND ESTADO = 'Asignado'`,[req.params.user], (err, rows, fields)=>{
+  mysqlConnection.query(`SELECT * FROM incidente WHERE operador_usuario = ?`,[req.params.user], (err, rows, fields)=>{
     if(!err){
     res.send(rows);}
     else
@@ -135,6 +136,13 @@ app.post('/login', (req, res) => {
           message: "access successfully"
         });
       }
+      else{
+        console.log("No coincide la contraseña")
+          return res.json({
+            success: -1,
+            message: "access unsuccessfully"
+          });
+        }
     }
     else{
     console.log("No existe el usuario")
@@ -208,6 +216,7 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
             console.log("datos insertados")
           })
         }else{
+          
           if(rows[0].ESTADO == 'terminado'){
             var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION, FECHA_CREADO,operador_usuario)  VALUES (?,?,?,?,?,?,?,?,NOW(),(SELECT usuario from incidentesdb.operador where usuario=' +"'" + emp.encargado + "'" +'))';
             mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
@@ -217,6 +226,7 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
             console.log("datos insertados")
           })
           }else{
+            
             res.send("Ya existe un caso con este dpi")
           }
         }
