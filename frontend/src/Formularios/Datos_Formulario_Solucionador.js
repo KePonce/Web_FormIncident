@@ -46,7 +46,7 @@ class Datos_Formulario_Worker extends Component {
     console.log(ctrl.isLogin(), ctrl.isSolucionador())
     if (ctrl.isLogin() && ctrl.isSolucionador()){
       return (
-        <div className="container">
+        
           <div><table class="table" >
             <thead class="thead-dark">
               <tr>
@@ -82,7 +82,7 @@ class Datos_Formulario_Worker extends Component {
             </tbody>
           </table>
           </div>
-        </div>
+        
       )
     }
     else{

@@ -51,8 +51,37 @@ app.get('/incidente', (req, res) => {
   });
 });
 
+app.get('/incidenteasignado', (req, res) => {
+  console.log("entro")
+  mysqlConnection.query(`SELECT * FROM incidente WHERE ESTADO = 'Asignado'`, (err, rows, fields)=>{
+    if(!err){
+    console.log(rows)
+    res.send(rows);}
+    else
+    console.log(err)
+  });
+});
+
+app.get('/incidenteresuelto', (req, res) => {
+  mysqlConnection.query(`SELECT * FROM incidente WHERE ESTADO = 'Resuelto'`, (err, rows, fields)=>{
+    if(!err){
+    res.send(rows);}
+    else
+    console.log(err)
+  });
+});
+
+app.get('/incidenteterminado', (req, res) => {
+  mysqlConnection.query(`SELECT * FROM incidente WHERE ESTADO = 'Terminado'`, (err, rows, fields)=>{
+    if(!err){
+    res.send(rows);}
+    else
+    console.log(err)
+  });
+});
+
 app.get('/IncidenteSolucionador/:user', (req, res) => {
-  mysqlConnection.query('SELECT * FROM incidente WHERE operador_usuario = ?',[req.params.user], (err, rows, fields)=>{
+  mysqlConnection.query(`SELECT * FROM incidente WHERE operador_usuario = ? AND ESTADO = 'Asignado'`,[req.params.user], (err, rows, fields)=>{
     if(!err){
     res.send(rows);}
     else

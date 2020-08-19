@@ -11,6 +11,30 @@ class Datos_Formulario extends Component {
     };
   }
 
+  async getResueltos(){
+    const formularios = (await axios.get('http://localhost:8082/incidenteresuelto')).data;
+    this.setState({
+      formularios
+    });
+    this.render()
+  }
+
+  async getAsignados(){
+    const formularios = (await axios.get('http://localhost:8082/incidenteasignado')).data;
+    this.setState({
+      formularios
+    });
+    this.render()
+  }
+
+  async getTerminados() {
+    const formularios = (await axios.get('http://localhost:8082/incidenteterminado')).data;
+    this.setState({
+      formularios
+    });
+    this.render()
+  }
+
   onSubmit = (dpi) => {
           
             
@@ -41,10 +65,22 @@ class Datos_Formulario extends Component {
 
   render() {
     let prueba ="";
+    
     let ctrl = new controlador()
     if(ctrl.isLogin() && ctrl.isDigitador()){
       return (
         
+
+          <div class ="container-fluid">
+
+          <div class="btn-group col-sm-12">
+          <button onClick={() => this.getAsignados()} className="btn btn-warning">Asignados</button>            
+          <button onClick={() => this.getResueltos()} className="btn btn-success">Resueltos</button>            
+          <button onClick={() => this.getTerminados()} className="btn btn-info">terminados</button>            
+          <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
+          </div>
+          
+          
           <div class="table-responsive">
             <table className="table table-md" >
             <thead className="thead-dark">
@@ -71,13 +107,13 @@ class Datos_Formulario extends Component {
                   
                       <tr>
                         
-                        <td>{formulario.NOMBRE_COMPLETO}</td>
+                        <td><b>{formulario.NOMBRE_COMPLETO}</b></td>
                         <td>{formulario.DPI}</td>
                         <td>{formulario.CELULAR}</td>
                         <td>{formulario.INCONFORMIDAD}</td>
                         <td>{formulario.DEPARTAMENTO}</td>
                         <td>{formulario.MUNICIPIO}</td>
-                        <td class={formulario.ESTADO == "Resuelto"?"bg-primary":formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}>{formulario.ESTADO}</td>
+                        <td class={formulario.ESTADO == "Resuelto"?"bg-primary":formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}><b>{formulario.ESTADO}</b></td>
                         <td>{formulario.operador_usuario}</td>
                         <td>{formulario.RESPUESTA}</td>
                         <td>{formulario.FECHA_CREADO}</td>
@@ -90,7 +126,7 @@ class Datos_Formulario extends Component {
             </tbody>
           </table>
           </div>
-        
+        </div>
       )
     }else{
       return (<p>Cargando incidentes  ...</p>);

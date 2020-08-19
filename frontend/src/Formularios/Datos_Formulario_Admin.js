@@ -10,6 +10,31 @@ class Datos_Formulario_Admin extends Component {
     };
   }
 
+  async getResueltos(){
+    const formularios = (await axios.get('http://localhost:8082/incidenteresuelto')).data;
+    this.setState({
+      formularios
+    });
+    this.render()
+  }
+
+  async getAsignados(){
+    const formularios = (await axios.get('http://localhost:8082/incidenteasignado')).data;
+    this.setState({
+      formularios
+    });
+    this.render()
+  }
+
+  async getTerminados() {
+    const formularios = (await axios.get('http://localhost:8082/incidenteterminado')).data;
+    this.setState({
+      formularios
+    });
+    this.render()
+  }
+
+
   onSubmit = (dpi) => {
     axios.post('http://localhost:8082/ActualizarEstado/'+dpi,{
         id: dpi,
@@ -34,20 +59,30 @@ class Datos_Formulario_Admin extends Component {
   render() {
     let ctrl = new controlador()
     return ctrl.isLogin() ?(
-      <div className="container">
-        <div><table class="table" >
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">DPI</th>
-              <th scope="col">Celular</th>
-              <th scope="col">Inconformidad</th>
-              <th scope="col">Departamento</th>
-              <th scope="col">Municipio</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Encargado</th>
-            </tr>
-          </thead>
+      
+      <div class ="container-fluid">
+
+        <div class="btn-group col-sm-12">
+        <button onClick={() => this.getAsignados()} className="btn btn-warning">Asignados</button>            
+        <button onClick={() => this.getResueltos()} className="btn btn-success">Resueltos</button>            
+        <button onClick={() => this.getTerminados()} className="btn btn-info">terminados</button>            
+        <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
+        </div>
+
+        <div class="table-responsive">
+            <table className="table table-md" >
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">DPI</th>
+                    <th scope="col">Celular</th>
+                    <th scope="col">Inconformidad</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Municipio</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Encargado</th>
+                  </tr>
+                </thead>
           <tbody>
             {this.state.formularios === null && <p>Loading formularios...</p>}
             {
@@ -60,7 +95,7 @@ class Datos_Formulario_Admin extends Component {
                       <td>{formulario.INCONFORMIDAD}</td>
                       <td>{formulario.DEPARTAMENTO}</td>
                       <td>{formulario.MUNICIPIO}</td>
-                      <td>{formulario.ESTADO}</td>
+                      <td class={formulario.ESTADO == "Resuelto"?"bg-primary":formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}>{formulario.ESTADO}</td>
                       <td>{formulario.operador_usuario}</td>
                     </tr>
               ))
@@ -69,6 +104,7 @@ class Datos_Formulario_Admin extends Component {
         </table>
         </div>
       </div>
+      
     ): <p>Cargando...</p>;
   }
 }
