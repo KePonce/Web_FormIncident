@@ -51,6 +51,7 @@ app.get('/incidente', (req, res) => {
   });
 });
 
+//Obtiene los incidentes con estado asignado
 app.get('/incidenteasignado', (req, res) => {
   console.log("entro")
   mysqlConnection.query(`SELECT * FROM incidente WHERE ESTADO = 'Asignado'`, (err, rows, fields)=>{
@@ -62,6 +63,7 @@ app.get('/incidenteasignado', (req, res) => {
   });
 });
 
+//Obtiene los incidentes con estado resuelto
 app.get('/incidenteresuelto', (req, res) => {
   mysqlConnection.query(`SELECT * FROM incidente WHERE ESTADO = 'Resuelto'`, (err, rows, fields)=>{
     if(!err){
@@ -71,6 +73,7 @@ app.get('/incidenteresuelto', (req, res) => {
   });
 });
 
+//Obtiene los incidentes con estado terminado
 app.get('/incidenteterminado', (req, res) => {
   mysqlConnection.query(`SELECT * FROM incidente WHERE ESTADO = 'Terminado'`, (err, rows, fields)=>{
     if(!err){
@@ -80,6 +83,7 @@ app.get('/incidenteterminado', (req, res) => {
   });
 });
 
+//Obtiene los incidentes de un solucionador
 app.get('/IncidenteSolucionador/:user', (req, res) => {
   //mysqlConnection.query(`SELECT * FROM incidente WHERE operador_usuario = ? AND ESTADO = 'Asignado'`,[req.params.user], (err, rows, fields)=>{
   mysqlConnection.query(`SELECT * FROM incidente WHERE operador_usuario = ?`,[req.params.user], (err, rows, fields)=>{
@@ -90,7 +94,7 @@ app.get('/IncidenteSolucionador/:user', (req, res) => {
   });
 });
 
-// retrieve all operador
+//Obtiene los operadores
 app.get('/operador', (req, res) => {
   mysqlConnection.query('SELECT * FROM operador', (err, rows, fields)=>{
     if(!err)
