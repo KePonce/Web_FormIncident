@@ -161,7 +161,7 @@ app.post('/login', (req, res) => {
 //Actualizar Incidente
 app.post('/ActualizarInc/:dpi', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, FECHA_CREADO = ?, ENCARGADO = ? WHERE DPI = ?', [emp.estado,'NOW()',emp.encargado,emp.id], function(err,data){
+  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, FECHA_CREADO = ?, ENCARGADO = ? WHERE DPI = ?', [emp.estado,'now()',emp.encargado,emp.id], function(err,data){
     if(err)
     console.log(err);
     else
@@ -194,6 +194,9 @@ app.post('/ResolverInc/:dpi', (req, res) => {
 //Actualizar Estado
 app.post('/ActualizarEstado/:dpi', (req, res) => {
   let emp = req.body;
+  var today = new Date();
+  var time = today.getFullYear()+ "-" + today.getMonth() + "-" + today.getDay() + ":" +  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  console.log(today, time);
   mysqlConnection.query('UPDATE incidente SET ESTADO = ?, FECHA_TERMINADO = now() WHERE DPI = ?', [emp.estado,emp.id], function(err,data){
     if(err)
     console.log(err);
@@ -222,7 +225,7 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
         }else{
           
           if(rows[0].ESTADO == 'terminado'){
-            var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION, FECHA_CREADO,operador_usuario)  VALUES (?,?,?,?,?,?,?,?,NOW(),(SELECT usuario from incidentesdb.operador where usuario=' +"'" + emp.encargado + "'" +'))';
+            var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION, FECHA_CREADO,operador_usuario)  VALUES (?,?,?,?,?,?,?,?,now(),(SELECT usuario from incidentesdb.operador where usuario=' +"'" + emp.encargado + "'" +'))';
             mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
             if(err)
             console.log(err);

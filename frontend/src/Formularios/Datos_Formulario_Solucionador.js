@@ -73,9 +73,12 @@ class Datos_Formulario_Worker extends Component {
                         <td>{formulario.INCONFORMIDAD}</td>
                         <td>{formulario.DEPARTAMENTO}</td>
                         <td>{formulario.MUNICIPIO}</td>
-                        <td>{formulario.ESTADO}</td>
+                        <td class={formulario.ESTADO == "Resuelto"?"bg-info"
+                                :formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}>{formulario.ESTADO}</td>
                         <td>{formulario.DIRECCION}</td>
-                        <td><Link class="btn btn-outline-info "  to={"/resolverincidente/"+formulario.DPI} >Resolver</Link></td>
+                        <td>{formulario.ESTADO == "Asignado"?<Link class="btn btn-outline-info "  to={"/resolverincidente/"+formulario.DPI} >Resolver</Link>
+                            :formulario.ESTADO == "Terminado"?<p>Caso Solucionado</p>:<p>Resuelto</p>}
+                        </td>
                       </tr>
                 ))
               }

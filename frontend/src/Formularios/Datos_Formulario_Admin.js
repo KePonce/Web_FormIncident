@@ -69,21 +69,22 @@ class Datos_Formulario_Admin extends Component {
           </div>  
             */
       <div class ="container-fluid">
-
-        
-
         <div class="table-responsive">
             <table className="table table-md" >
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">DPI</th>
-                    <th scope="col">Celular</th>
-                    <th scope="col">Inconformidad</th>
-                    <th scope="col">Departamento</th>
-                    <th scope="col">Municipio</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Encargado</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">DPI</th>
+                  <th scope="col">Celular</th>
+                  <th scope="col">Inconformidad</th>
+                  <th scope="col">Departamento</th>
+                  <th scope="col">Municipio</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Encargado</th>
+                  <th scope="col">Respuesta</th>
+                  <th scope="col">Fecha_Creado</th>
+                  <th scope="col">Fecha_Resuelto</th>
+                  <th scope="col">Fecha_Terminado</th>
                   </tr>
                 </thead>
           <tbody>
@@ -98,8 +99,13 @@ class Datos_Formulario_Admin extends Component {
                       <td>{formulario.INCONFORMIDAD}</td>
                       <td>{formulario.DEPARTAMENTO}</td>
                       <td>{formulario.MUNICIPIO}</td>
-                      <td class={formulario.ESTADO == "Resuelto"?"bg-primary":formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}>{formulario.ESTADO}</td>
+                      <td class={formulario.ESTADO == "Resuelto"?"bg-info"
+                                :formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}>{formulario.ESTADO}</td>
                       <td>{formulario.operador_usuario}</td>
+                      <td>{formulario.RESPUESTA}</td>
+                      <td>{formulario.FECHA_CREADO}</td>
+                      <td>{formulario.FECHA_RESUELTO}</td>
+                      <td>{formulario.FECHA_TERMINADO}</td>
                     </tr>
               ))
             }

@@ -65,7 +65,6 @@ class Datos_Formulario extends Component {
 
   render() {
     let prueba ="";
-    
     let ctrl = new controlador()
     if(ctrl.isLogin() && ctrl.isDigitador()){
       return (
@@ -80,9 +79,6 @@ class Datos_Formulario extends Component {
             */
 
           <div class ="container-fluid">
-        
-          
-          
           <div class="table-responsive">
             <table className="table table-md" >
             <thead className="thead-dark">
@@ -96,32 +92,27 @@ class Datos_Formulario extends Component {
                 <th scope="col">Estado</th>
                 <th scope="col">Encargado</th>
                 <th scope="col">Respuesta</th>
-                <th scope="col">Fecha_Creado</th>
-                <th scope="col">Fecha_Resuelto</th>
                 <th scope="col">Terminar</th>
               </tr>
             </thead>
             <tbody>
               {this.state.formularios === null && <p>Loading formularios...</p>}
-                
               {
                 this.state.formularios && this.state.formularios.map(formulario => (
-                  
                       <tr>
-                        
+                        {console.log("valores",formulario)}
                         <td><b>{formulario.NOMBRE_COMPLETO}</b></td>
                         <td>{formulario.DPI}</td>
                         <td>{formulario.CELULAR}</td>
                         <td>{formulario.INCONFORMIDAD}</td>
                         <td>{formulario.DEPARTAMENTO}</td>
                         <td>{formulario.MUNICIPIO}</td>
-                        <td class={formulario.ESTADO == "Resuelto"?"bg-primary":formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}><b>{formulario.ESTADO}</b></td>
+                        <td class={formulario.ESTADO == "Resuelto"?"bg-info"
+                                  :formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}><b>{formulario.ESTADO}</b></td>
                         <td>{formulario.operador_usuario}</td>
                         <td>{formulario.RESPUESTA}</td>
-                        <td>{formulario.FECHA_CREADO}</td>
-                        <td>{formulario.FECHA_RESUELTO}</td>
-                        
-                <td>{formulario.ESTADO == "Resuelto"?<a href="#/formulario" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Terminar Caso</a>:formulario.ESTADO == "Terminado"?<p>Caso Finalizado</p>:<p>en proceso</p>}</td>
+                        <td>{formulario.ESTADO == "Resuelto"?<a href="#/tablaincidentes" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Terminar Caso</a>
+                            :formulario.ESTADO == "Terminado"?<p>Caso Finalizado</p>:<p>En proceso</p>}</td>
                       </tr>
                 ))
               }
