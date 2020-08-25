@@ -54,18 +54,18 @@ class Editar_Formulario extends Component {
         <div className="jumbotron col-12">
         {this.state.formulario && this.state.formulario.map(form => (
           <div>
-                <h6>{"DPI: " + form.DPI}</h6>
-                <h6>{"Nombre: " + form.NOMBRE_COMPLETO}</h6>
-                <h6>{"Celular: " + form.CELULAR}</h6>
-                <h6>{"Inconformidad: " + form.INCONFORMIDAD}</h6>
-                <h6>{"Departamento: " + form.DEPARTAMENTO}</h6>
-                <h6>{"Municipio: " + form.MUNICIPIO}</h6>
-                <h6>{"Estatus: " + form.ESTADO}</h6>
+                <h6>{"DPI: " + form.dpi}</h6>
+                <h6>{"Nombre: " + form.nombre_completo}</h6>
+                <h6>{"Celular: " + form.celular}</h6>
+                <h6>{"Inconformidad: " + form.inconformidad}</h6>
+                <h6>{"Departamento: " + form.departamento}</h6>
+                <h6>{"Municipio: " + form.municipio}</h6>
+                <h6>{"Estatus: " + form.estado}</h6>
                 <TextField id="outlined-multiline-flexible" label="Descripcion" name="Descripcion"
                   fullWidth multiline rowsMax={5} value={this.state.Descripcion}
                   onChange={this.handleChange} variant="outlined"/>
                 <div className="jumbotron col-12"> 
-                <a href="#/solucionarincidente" onClick={() => this.onSubmit(form.DPI)} className="btn btn-info btn-block">Resolver</a>
+                <a href="#/solucionarincidente" onClick={() => this.onSubmit(form.dpi)} className="btn btn-info btn-block">Resolver</a>
                 </div>
           </div>
           ))

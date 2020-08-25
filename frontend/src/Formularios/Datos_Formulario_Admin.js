@@ -93,19 +93,19 @@ class Datos_Formulario_Admin extends Component {
               this.state.formularios && this.state.formularios.map(formulario => (
                     <tr>
                       {console.log(formulario)}
-                      <td>{formulario.NOMBRE_COMPLETO}</td>
-                      <td>{formulario.DPI}</td>
-                      <td>{formulario.CELULAR}</td>
-                      <td>{formulario.INCONFORMIDAD}</td>
-                      <td>{formulario.DEPARTAMENTO}</td>
-                      <td>{formulario.MUNICIPIO}</td>
-                      <td class={formulario.ESTADO == "Resuelto"?"bg-info"
-                                :formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}>{formulario.ESTADO}</td>
+                      <td>{formulario.nombre_completo}</td>
+                      <td>{formulario.dpi}</td>
+                      <td>{formulario.celular}</td>
+                      <td>{formulario.inconformidad}</td>
+                      <td>{formulario.departamento}</td>
+                      <td>{formulario.municipio}</td>
+                      <td class={formulario.estado == "Resuelto"?"bg-info"
+                                :formulario.estado == "Terminado"?"bg-success":"bg-warning"}>{formulario.estado}</td>
                       <td>{formulario.operador_usuario}</td>
-                      <td>{formulario.RESPUESTA}</td>
-                      <td>{formulario.FECHA_CREADO}</td>
-                      <td>{formulario.FECHA_RESUELTO}</td>
-                      <td>{formulario.FECHA_TERMINADO}</td>
+                      <td>{formulario.respuesta}</td>
+                      <td>{formulario.fecha_creado}</td>
+                      <td>{formulario.fecha_resuelto}</td>
+                      <td>{formulario.fecha_terminado}</td>
                     </tr>
               ))
             }

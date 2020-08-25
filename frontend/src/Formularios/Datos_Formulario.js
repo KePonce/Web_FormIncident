@@ -99,21 +99,21 @@ class Datos_Formulario extends Component {
               {this.state.formularios === null && <p>Loading formularios...</p>}
               {
                 this.state.formularios && this.state.formularios.map(formulario => (
-                      <tr>
-                        {console.log("valores",formulario)}
-                        <td><b>{formulario.NOMBRE_COMPLETO}</b></td>
-                        <td>{formulario.DPI}</td>
-                        <td>{formulario.CELULAR}</td>
-                        <td>{formulario.INCONFORMIDAD}</td>
-                        <td>{formulario.DEPARTAMENTO}</td>
-                        <td>{formulario.MUNICIPIO}</td>
-                        <td class={formulario.ESTADO == "Resuelto"?"bg-info"
-                                  :formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}><b>{formulario.ESTADO}</b></td>
-                        <td>{formulario.operador_usuario}</td>
-                        <td>{formulario.RESPUESTA}</td>
-                        <td>{formulario.ESTADO == "Resuelto"?<a href="#/tablaincidentes" onClick={() => this.onSubmit(formulario.DPI)} className="btn btn-info btn-block">Terminar Caso</a>
-                            :formulario.ESTADO == "Terminado"?<p>Caso Finalizado</p>:<p>En proceso</p>}</td>
-                      </tr>
+                  <tr>
+                      {console.log("valores",formulario)}
+                      <td><b>{formulario.nombre_completo}</b></td>
+                      <td>{formulario.dpi}</td>
+                      <td>{formulario.celular}</td>
+                      <td>{formulario.inconformidad}</td>
+                      <td>{formulario.departamento}</td>
+                      <td>{formulario.municipio}</td>
+                      <td class={formulario.estado == "Resuelto"?"bg-info"
+                        :formulario.estado == "Terminado"?"bg-success":"bg-warning"}><b>{formulario.estado}</b></td>
+                      <td>{formulario.operador_usuario}</td>
+                      <td>{formulario.respuesta}</td>
+                      <td>{formulario.estado == "Resuelto"?<a href="#/tablaincidentes" onClick={() => this.onSubmit(formulario.dpi)} className="btn btn-info btn-block">Terminar Caso</a>
+                        :formulario.estado == "Terminado"?<p>Caso Finalizado</p>:<p>En proceso</p>}</td>
+                  </tr>
                 ))
               }
             </tbody>

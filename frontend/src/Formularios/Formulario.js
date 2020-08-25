@@ -664,7 +664,7 @@ class Formulario extends React.Component {
                         {
                         this.state.inconformidades && this.state.inconformidades.map(inconformidades => (
                             <option>
-                                {inconformidades.Nombre_Inconformidad}
+                                {inconformidades.nombre_inconformidad}
                             </option>    
                         ))
                         }

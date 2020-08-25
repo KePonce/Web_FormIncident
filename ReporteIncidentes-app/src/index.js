@@ -12,9 +12,23 @@ const jwt = require("jsonwebtoken")
 process.env.SECRET_KEY = 'secret'
 // define the Express app
 const app = express();
+const { response } = require('express');
+
+const {Pool} = require("pg")
+
+
+//coneccion a la base de datos
+const connectionData = {
+  user: 'postgres',
+  host: 'localhost',
+  database: 'postgres',
+  password: 'password',
+  port: 5432,
+}
+const client = new Pool(connectionData)
 
 // the database
-var mysqlConnection = mysql.createConnection({
+/*var mysqlConnection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
@@ -26,7 +40,17 @@ mysqlConnection.connect((err)=>{
   console.log('DB connection succeded')
   else
   console.log('DB connection failed \n Error : ' + JSON.stringify(err,undefined,2));
-});
+});*/
+
+client.connect((err)=>{
+  if(!err){
+    console.log('DBPostgre connection succeded')
+  }
+  else{
+    console.log('DBPostgre connection failed \n Error : ' + JSON.stringify(err,undefined,2));
+  }
+})
+
 
 // enhance your app security with Helmet
 app.use(helmet());
@@ -41,11 +65,11 @@ app.use(cors());
 app.use(morgan('combined'));
 
 
-// retrieve all incidentes
+// obtener incidentes
 app.get('/incidente', (req, res) => {
-  mysqlConnection.query('SELECT * FROM incidente', (err, rows, fields)=>{
+  client.query('SELECT * FROM incidente', (err, rows, fields)=>{
     if(!err){
-    res.send(rows);}
+    res.send(rows.rows);}
     else
     console.log(err)
   });
@@ -53,10 +77,9 @@ app.get('/incidente', (req, res) => {
 
 //Obtiene los incidentes con estado asignado
 app.get('/incidenteasignado', (req, res) => {
-  console.log("entro")
-  mysqlConnection.query(`SELECT * FROM incidente WHERE ESTADO = 'Asignado'`, (err, rows, fields)=>{
+  client.query(`SELECT * FROM incidente WHERE estado = 'Asignado'`, (err, rows, fields)=>{
     if(!err){
-    res.send(rows);}
+    res.send(rows.rows);}
     else
     console.log(err)
   });
@@ -64,9 +87,9 @@ app.get('/incidenteasignado', (req, res) => {
 
 //Obtiene los incidentes con estado resuelto
 app.get('/incidenteresuelto', (req, res) => {
-  mysqlConnection.query(`SELECT * FROM incidente WHERE ESTADO = 'Resuelto'`, (err, rows, fields)=>{
+  client.query(`SELECT * FROM incidente WHERE estado = 'Resuelto'`, (err, rows, fields)=>{
     if(!err){
-    res.send(rows);}
+    res.send(rows.rows);}
     else
     console.log(err)
   });
@@ -74,9 +97,9 @@ app.get('/incidenteresuelto', (req, res) => {
 
 //Obtiene los incidentes con estado terminado
 app.get('/incidenteterminado', (req, res) => {
-  mysqlConnection.query(`SELECT * FROM incidente WHERE ESTADO = 'Terminado'`, (err, rows, fields)=>{
+  client.query(`SELECT * FROM incidente WHERE estado = 'Terminado'`, (err, rows, fields)=>{
     if(!err){
-    res.send(rows);}
+    res.send(rows.rows);}
     else
     console.log(err)
   });
@@ -85,9 +108,9 @@ app.get('/incidenteterminado', (req, res) => {
 //Obtiene los incidentes de un solucionador
 app.get('/IncidenteSolucionador/:user', (req, res) => {
   //mysqlConnection.query(`SELECT * FROM incidente WHERE operador_usuario = ? AND ESTADO = 'Asignado'`,[req.params.user], (err, rows, fields)=>{
-  mysqlConnection.query(`SELECT * FROM incidente WHERE operador_usuario = ?`,[req.params.user], (err, rows, fields)=>{
+  client.query(`SELECT * FROM incidente WHERE operador_usuario = $1`,[req.params.user], (err, rows, fields)=>{
     if(!err){
-    res.send(rows);}
+    res.send(rows.rows);}
     else
     console.log(err)
   });
@@ -95,9 +118,9 @@ app.get('/IncidenteSolucionador/:user', (req, res) => {
 
 //Obtiene los operadores
 app.get('/operador', (req, res) => {
-  mysqlConnection.query('SELECT * FROM operador', (err, rows, fields)=>{
+  client.query('SELECT * FROM operador', (err, rows, fields)=>{
     if(!err)
-    res.send(rows);
+    res.send(rows.rows);
     else
     console.log(err)
   });
@@ -105,9 +128,9 @@ app.get('/operador', (req, res) => {
 
 // retrieve all inconformidad
 app.get('/inconformidad', (req, res) => {
-  mysqlConnection.query('SELECT * FROM inconformidad', (err, rows, fields)=>{
+  client.query('SELECT * FROM inconformidad', (err, rows, fields)=>{
     if(!err){
-    res.send(rows);}
+    res.send(rows.rows);}
     else
     console.log(err)
   });
@@ -115,9 +138,10 @@ app.get('/inconformidad', (req, res) => {
 
 // get a specific incidente
 app.get('/incidente/:dpi', (req, res) => {
-  mysqlConnection.query('SELECT * FROM incidente WHERE DPI = ?', [req.params.dpi], (err, rows, fields)=>{
-    if(!err)
-    res.send(rows);
+  client.query('SELECT * FROM incidente WHERE dpi = $1', [req.params.dpi], (err, rows, fields)=>{
+    if(!err){
+    console.log(rows.rows)
+    res.send(rows.rows);}
     else
     console.log(err)
   })
@@ -126,13 +150,13 @@ app.get('/incidente/:dpi', (req, res) => {
 //Ingreso de usuario
 app.post('/login', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('SELECT * FROM operador WHERE Usuario = ?', [emp.usuario], (err, rows, fields)=>{
-    if(!err && rows.length > 0){
-      if(emp.pass==rows[0].pass) {
+  client.query('SELECT * FROM operador WHERE usuario = $1', [emp.usuario], (err, rows, fields)=>{
+    if(!err && rows.rows.length > 0){
+      if(emp.pass==rows.rows[0].pass) {
         return res.json({
           success: 23,
-          user: rows[0].usuario,
-          rol: rows[0].rol,
+          user: rows.rows[0].usuario,
+          rol: rows.rows[0].rol,
           message: "access successfully"
         });
       }
@@ -157,7 +181,7 @@ app.post('/login', (req, res) => {
 //Actualizar Incidente
 app.post('/ActualizarInc/:dpi', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, FECHA_CREADO = ?, ENCARGADO = ? WHERE DPI = ?', [emp.estado,'now()',emp.encargado,emp.id], function(err,data){
+  client.query('UPDATE incidente SET estado = $1, fecha_creado = $2, encargado = $3 WHERE dpi = $4', [emp.estado,'now()',emp.encargado,emp.id], function(err,data){
     if(err)
     console.log(err);
     else
@@ -168,7 +192,7 @@ app.post('/ActualizarInc/:dpi', (req, res) => {
 //Actualizar Descripcion
 app.post('/ActualizarDescripcion/:dpi', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, DESCRIPCION = ? WHERE DPI = ?', [emp.estado,emp.desc,emp.id], function(err,data){
+  client.query('UPDATE incidente SET estado = $1, descripcion = $2 WHERE dpi = $3', [emp.estado,emp.desc,emp.id], function(err,data){
     if(err)
     console.log(err);
     else
@@ -179,7 +203,7 @@ app.post('/ActualizarDescripcion/:dpi', (req, res) => {
 //Terminar Incidente
 app.post('/ResolverInc/:dpi', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, FECHA_RESUELTO = now(), RESPUESTA = ? WHERE DPI = ?', [emp.estado,emp.desc,emp.id], function(err,data){
+  client.query('UPDATE incidente SET estado = $1, fecha_resuelto = now(), respuesta = $2 WHERE dpi = $3', [emp.estado,emp.desc,emp.id], function(err,data){
     if(err)
     console.log(err);
     else
@@ -190,36 +214,36 @@ app.post('/ResolverInc/:dpi', (req, res) => {
 //Actualizar Estado
 app.post('/ActualizarEstado/:dpi', (req, res) => {
   let emp = req.body;
-  mysqlConnection.query('UPDATE incidente SET ESTADO = ?, FECHA_TERMINADO = now() WHERE DPI = ?', [emp.estado,emp.id], function(err,data){
+  client.query('UPDATE incidente SET estado = $1, fecha_terminado = now() WHERE dpi = $2', [emp.estado,emp.id], function(err,data){
     if(err)
     console.log(err);
     else
-    console.log("datos actualizados")
+    console.log("Datos actualizados")
   })
 });
 
 //Insertar nuevo incidente
   app.post('/InsertarInc', (req, res) => {
     let emp = req.body;
-    mysqlConnection.query('SELECT * FROM incidente WHERE DPI = ?', [emp.dpi], (err, rows, fields)=>{
+    client.query('SELECT * FROM incidente WHERE dpi = $1', [emp.dpi], (err, rows, fields)=>{
       if(!err)
       {
-        if(rows.length == 0){
-          var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION,FECHA_CREADO, operador_usuario)  VALUES (?,?,?,?,?,?,?,?,now(),(SELECT operador_usuario from incidentesdb.inconformidad where Nombre_Inconformidad =' +"'" + emp.inconformidad + "'" +'))';
-          mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
+        if(rows.rows.length == 0){
+          var sql = 'INSERT INTO incidente(nombre_completo, dpi, celular, inconformidad, departamento, municipio, estado, direccion, fecha_creado,operador_usuario) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),(SELECT operador_usuario from inconformidad where nombre_inconformidad =' +"'" + emp.inconformidad + "'" +'))';
+          client.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
             if(err)
             console.log(err);
             else
-            console.log("datos insertados")
+            console.log("Datos insertados")
           })
         }else{
-          if(rows[0].ESTADO == 'terminado'){
-            var sql = 'INSERT INTO incidente(NOMBRE_COMPLETO, DPI, CELULAR, INCONFORMIDAD, DEPARTAMENTO, MUNICIPIO, ESTADO, DIRECCION, FECHA_CREADO,operador_usuario)  VALUES (?,?,?,?,?,?,?,?,now(),(SELECT usuario from incidentesdb.operador where usuario=' +"'" + emp.encargado + "'" +'))';
-            mysqlConnection.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
+          if(rows.rows[0].ESTADO == 'Terminado'){
+            var sql = 'INSERT INTO incidente(nombre_completo, dpi, celular, inconformidad, departamento, municipio, estado, direccion, fecha_creado,operador_usuario)  VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),(SELECT usuario from operador where usuario=' +"'" + emp.encargado + "'" +'))';
+            cliente.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
             if(err)
             console.log(err);
             else
-            console.log("datos insertados")
+            console.log("Datos insertados")
           })
           }else{
             res.send("Ya existe un caso con este dpi")
@@ -234,14 +258,14 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
 
 //Ingresar nueva inconformidad
   app.post('/NuevaInconformidad', (req, res) => {
-    console.log("inconformidad");
     let emp = req.body;
-    mysqlConnection.query('SELECT * FROM inconformidad WHERE Nombre_Inconformidad = ?', [emp.dpi], (err, rows, fields)=>{
+    client.query('SELECT * FROM inconformidad WHERE nombre_inconformidad = $1', [emp.nombre_inconformidad], (err, rows, fields)=>{
       if(!err)
       {
-        if(rows.length == 0){
-          var sql = 'INSERT INTO inconformidad(Nombre_Inconformidad, Encargado, Respuesta, Estado, operador_usuario)  VALUES (?,?,?,?,(SELECT usuario from incidentesdb.operador where usuario=' +"'" + emp.encargado + "'" +'))';
-          mysqlConnection.query(sql, [emp.nombre_inconformidad, emp.encargado, emp.respuesta, emp.estado], function(err, data){
+        console.log(rows.rows);
+        if(rows.rows.length == 0){
+          var sql = 'INSERT INTO inconformidad(nombre_inconformidad, encargado, respuesta, estado, operador_usuario)  VALUES ($1,$2,$3,$4,(SELECT usuario from operador where usuario=' +"'" + emp.encargado + "'" +'))';
+          client.query(sql, [emp.nombre_inconformidad, emp.encargado, emp.respuesta, emp.estado], function(err, data){
             if(err)
             console.log(err);
             else

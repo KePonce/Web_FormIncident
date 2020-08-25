@@ -65,21 +65,21 @@ class Datos_Formulario_Worker extends Component {
               {this.state.formularios === null && <p>Loading formularios...</p>}
               {
                 this.state.formularios && this.state.formularios.map(formulario => (
-                      <tr>
-                        {console.log(formulario)}
-                        <td>{formulario.NOMBRE_COMPLETO}</td>
-                        <td>{formulario.DPI}</td>
-                        <td>{formulario.CELULAR}</td>
-                        <td>{formulario.INCONFORMIDAD}</td>
-                        <td>{formulario.DEPARTAMENTO}</td>
-                        <td>{formulario.MUNICIPIO}</td>
-                        <td class={formulario.ESTADO == "Resuelto"?"bg-info"
-                                :formulario.ESTADO == "Terminado"?"bg-success":"bg-warning"}>{formulario.ESTADO}</td>
-                        <td>{formulario.DIRECCION}</td>
-                        <td>{formulario.ESTADO == "Asignado"?<Link class="btn btn-outline-info "  to={"/resolverincidente/"+formulario.DPI} >Resolver</Link>
-                            :formulario.ESTADO == "Terminado"?<p>Caso Solucionado</p>:<p>Resuelto</p>}
-                        </td>
-                      </tr>
+                  <tr>
+                    {console.log(formulario)}
+                    <td>{formulario.nombre_completo}</td>
+                    <td>{formulario.dpi}</td>
+                    <td>{formulario.celular}</td>
+                    <td>{formulario.inconformidad}</td>
+                    <td>{formulario.departamento}</td>
+                    <td>{formulario.municipio}</td>
+                    <td class={formulario.estado == "Resuelto"?"bg-info"
+                            :formulario.estado == "Terminado"?"bg-success":"bg-warning"}>{formulario.estado}</td>
+                    <td>{formulario.direccion}</td>
+                    <td>{formulario.estado == "Asignado"?<Link class="btn btn-outline-info "  to={"/resolverincidente/"+formulario.dpi} >Resolver</Link>
+                        :formulario.estado == "Terminado"?<p>Caso Solucionado</p>:<p>Resuelto</p>}
+                    </td>
+                  </tr>
                 ))
               }
             </tbody>
