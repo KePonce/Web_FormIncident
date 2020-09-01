@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import Inicio from './Inicio/PantallaAdmin';
 import InicioAdmin from './Inicio/DatosAdmin';
+import NuevoUsuario from './Inicio/NuevoUsuario';
 import Solucionar from './Inicio/PantallaSolucionador';
 import EditarInc from './Inicio/Editar'
 import ResolveInc from './Inicio/ResolverIncidente'
@@ -27,6 +28,7 @@ ReactDOM.render(
                 {/*Pagina para Administrador */}
                 <Route exact path='/tablageneral' component={InicioAdmin} />
                 <Route path="/nuevainconformidad" component={IngInconf} />
+                <Route path="/nuevousuario" component={NuevoUsuario} />
 
                 <Route path="/tablaincidentes/:dpi" component={EditarInc} />
               </Switch>

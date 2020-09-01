@@ -14,6 +14,7 @@ function NavBar() {
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
           <a className="navbar-brand" href="#/tablageneral">Incidentes Reportados</a>
           <a className="navbar-brand" href="#/nuevainconformidad">Inconformidad</a>
+          <a className="navbar-brand" href="#/nuevousuario">Nuevo Usuario</a>
           <a href="#/" onClick={() => onSubmit()} className="btn btn-info ">Salir</a>
         </nav>
       </>
