@@ -1,6 +1,7 @@
 import React from 'react';
 import estilos from './estilo.css';
 import axios from 'axios';
+import {getHost} from './UserFunctions'
 import { controlador } from './controlador'
 // import Formulario_quejas from './formulario_quejas/Formulario_Quejas';
 
@@ -22,7 +23,7 @@ class Inconformidad_Formulario extends React.Component {
       }
 
       async componentDidMount() {
-        const inconformidades = (await axios.get('http://localhost:8082/operador')).data;
+        const inconformidades = (await axios.get(`http://`+ getHost()+`/operador`)).data;
         this.setState({
             inconformidades
         });
@@ -35,7 +36,7 @@ class Inconformidad_Formulario extends React.Component {
                         this.state.respuesta=''
                     }
                     //Ingresar nueva inconformidad
-                    axios.post('http://localhost:8082/NuevaInconformidad',{
+                    axios.post(`http://`+ getHost()+`/NuevaInconformidad`,{
                         nombre_inconformidad: this.state.inconformidad,
                         encargado: this.state.operador,
                         respuesta: this.state.respuesta,

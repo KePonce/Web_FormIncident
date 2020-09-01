@@ -2,6 +2,7 @@ import React from 'react';
 import estilos from './estilo.css';
 import axios from 'axios';
 import { controlador } from './controlador'
+import {getHost} from './UserFunctions'
 import FormDialog from './VentaEmergente';
 // import Formulario_quejas from './formulario_quejas/Formulario_Quejas';
 
@@ -30,7 +31,7 @@ class Formulario extends React.Component {
 
       
       async componentDidMount() {
-        const inconformidades = (await axios.get('http://localhost:8082/inconformidad')).data;
+        const inconformidades = (await axios.get(`http://`+ getHost()+`/inconformidad`)).data;
         this.setState({
             inconformidades
         });
@@ -38,7 +39,7 @@ class Formulario extends React.Component {
 
       //Button function to post incidents
       onSubmit = () => {
-                    axios.post('http://localhost:8082/InsertarInc',{
+                    axios.post(`http://`+ getHost()+`/InsertarInc`,{
                         nombre: this.state.name,
                         dpi: this.state.dpi,
                         celular: this.state.celular,

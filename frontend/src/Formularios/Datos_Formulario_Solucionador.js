@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import {getHost} from './UserFunctions'
 import { controlador } from './controlador'
 class Datos_Formulario_Worker extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Datos_Formulario_Worker extends Component {
   onSubmit = (dpi) => {
           
             
-    axios.post('http://localhost:8082/ActualizarEstado/'+dpi,{
+    axios.post(`http://`+ getHost()+`/ActualizarEstado/`+dpi,{
         id: dpi,
         estado: "Resuelto",
         
@@ -33,7 +34,7 @@ class Datos_Formulario_Worker extends Component {
   //Conexion con el backend en puerto 8081
   async componentDidMount() {
     let ctrl = new controlador()
-    const formularios = (await axios.get('http://localhost:8082/IncidenteSolucionador/'+ctrl.getUser())).data;
+    const formularios = (await axios.get(`http://`+ getHost()+`/IncidenteSolucionador/`+ctrl.getUser())).data;
     
     
     this.setState({

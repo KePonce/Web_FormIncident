@@ -29,10 +29,17 @@ export function getPath(rol) {
 
 }
 
+//Ruta principal depende del rol de usuario
+export function getHost() {
+    
+   return "34.217.43.198:8082"
+
+}
+
 export const login = user =>{
     
     return axios
-    .post('http://localhost:8082/login', {
+    .post(`http://`+ getHost()+`/login`, {
         usuario: user.usuario,
         pass: user.pass
     })

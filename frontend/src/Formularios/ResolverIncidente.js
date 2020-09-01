@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
+import {getHost} from './UserFunctions'
 import { controlador } from './controlador';
 
 class Editar_Formulario extends Component {
@@ -22,7 +23,7 @@ class Editar_Formulario extends Component {
   }
 
   onSubmit = (dpi) => {
-    axios.post('http://localhost:8082/ResolverInc/'+dpi,{
+    axios.post(`http://`+ getHost()+`/ResolverInc/`+dpi,{
         desc: this.state.Descripcion,
         id: dpi,
         estado: "Resuelto",   
@@ -38,7 +39,7 @@ class Editar_Formulario extends Component {
    async componentDidMount() {
     let userId = this.props.match.params.dpi;
     console.log(userId)
-    const formularios = (await axios.get(`http://localhost:8082/incidente/${userId}`)).data;
+    const formularios = (await axios.get(`http://`+ getHost()+`/incidente/${userId}`)).data;
     console.log(formularios)  
     this.setState({
       formulario: formularios
