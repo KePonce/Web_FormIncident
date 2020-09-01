@@ -29,7 +29,7 @@ export function getPath(rol) {
 
 }
 
-//Ruta principal depende del rol de usuario
+//Ruta ip backend
 export function getHost() {
     
    return "34.217.43.198:8082"
