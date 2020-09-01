@@ -10,9 +10,9 @@ class Datos_Formulario_Admin extends Component {
       formularios: null,
     };
   }
-/*
+
   async getResueltos(){
-    const formularios = (await axios.get('http://34.217.43.198:8082/incidenteresuelto')).data;
+    const formularios = (await axios.get(`http://`+ getHost()+`/incidenteresuelto`)).data;
     this.setState({
       formularios
     });
@@ -20,7 +20,7 @@ class Datos_Formulario_Admin extends Component {
   }
 
   async getAsignados(){
-    const formularios = (await axios.get('http://34.217.43.198:8082/incidenteasignado')).data;
+    const formularios = (await axios.get(`http://`+ getHost()+`/incidenteasignado`)).data;
     this.setState({
       formularios
     });
@@ -28,14 +28,13 @@ class Datos_Formulario_Admin extends Component {
   }
 
   async getTerminados() {
-    const formularios = (await axios.get('http://34.217.43.198:8082/incidenteterminado')).data;
+    const formularios = (await axios.get(`http://`+ getHost()+`/incidenteterminado`)).data;
     this.setState({
       formularios
     });
     this.render()
   }
 
-*/
   onSubmit = (dpi) => {
     axios.post(`http://`+ getHost()+`/ActualizarEstado/`+dpi,{
         id: dpi,
@@ -55,21 +54,19 @@ class Datos_Formulario_Admin extends Component {
     this.setState({
       formularios
     });
+    this.render()
   }
 
   render() {
     let ctrl = new controlador()
     return ctrl.isLogin() ?(
-      /*
-            DETRO DEL CONTEINER
-          <div class="btn-group col-sm-12">
-          <button onClick={() => this.getAsignados()} className="btn btn-warning">Asignados</button>            
-          <button onClick={() => this.getResueltos()} className="btn btn-success">Resueltos</button>            
-          <button onClick={() => this.getTerminados()} className="btn btn-info">terminados</button>            
-          <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
-          </div>  
-            */
       <div class ="container-fluid">
+           <div class="btn-group col-sm-12">
+              <button onClick={() => this.getAsignados()} className="btn btn-warning">Asignados</button>            
+              <button onClick={() => this.getResueltos()} className="btn btn-success">Resueltos</button>            
+              <button onClick={() => this.getTerminados()} className="btn btn-info">Terminados</button>            
+              <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
+            </div>  
         <div class="table-responsive">
             <table className="table table-md" >
                 <thead class="thead-dark">

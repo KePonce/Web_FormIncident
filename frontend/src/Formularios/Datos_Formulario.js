@@ -11,9 +11,9 @@ class Datos_Formulario extends Component {
       formularios: null,
     };
   }
-/*
+
   async getResueltos(){
-    const formularios = (await axios.get('http://34.217.43.198:8082/incidenteresuelto')).data;
+    const formularios = (await axios.get(`http://`+ getHost()+`/incidenteresuelto`)).data;
     this.setState({
       formularios
     });
@@ -21,7 +21,7 @@ class Datos_Formulario extends Component {
   }
 
   async getAsignados(){
-    const formularios = (await axios.get('http://34.217.43.198:8082/incidenteasignado')).data;
+    const formularios = (await axios.get(`http://`+ getHost()+`/incidenteasignado`)).data;
     this.setState({
       formularios
     });
@@ -29,20 +29,17 @@ class Datos_Formulario extends Component {
   }
 
   async getTerminados() {
-    const formularios = (await axios.get('http://34.217.43.198:8082/incidenteterminado')).data;
+    const formularios = (await axios.get(`http://`+ getHost()+`/incidenteterminado`)).data;
     this.setState({
       formularios
     });
     this.render()
   }
-*/
+
   onSubmit = (dpi) => {
-          
-            
     axios.post(`http://`+ getHost()+`/ActualizarEstado/`+dpi,{
         id: dpi,
         estado: "Terminado",
-        
     })
     .then(function (response) {
         console.log(response);
@@ -50,36 +47,29 @@ class Datos_Formulario extends Component {
     .catch(function (error) {
         console.log(error);
     });
-
 }
 
-
-
-  //Conexion con el backend en puerto 8081
+  //Conexion con el backend en puerto 8082
   async componentDidMount() {
     const formularios = (await axios.get(`http://`+ getHost()+`/incidente`)).data;
     
     this.setState({
       formularios
     });
+    this.render()
   }
 
   render() {
-    let prueba ="";
     let ctrl = new controlador()
     if(ctrl.isLogin() && ctrl.isDigitador()){
       return (
-            /*
-            DETRO DEL CONTEINER
-          <div class="btn-group col-sm-12">
-          <button onClick={() => this.getAsignados()} className="btn btn-warning">Asignados</button>            
-          <button onClick={() => this.getResueltos()} className="btn btn-success">Resueltos</button>            
-          <button onClick={() => this.getTerminados()} className="btn btn-info">terminados</button>            
-          <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
-          </div>  
-            */
-
           <div class ="container-fluid">
+            <div class="btn-group col-sm-12">
+              <button onClick={() => this.getAsignados()} className="btn btn-warning">Asignados</button>            
+              <button onClick={() => this.getResueltos()} className="btn btn-success">Resueltos</button>            
+              <button onClick={() => this.getTerminados()} className="btn btn-info">Terminados</button>            
+              <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
+            </div> 
           <div class="table-responsive">
             <table className="table table-md" >
             <thead className="thead-dark">
@@ -112,7 +102,7 @@ class Datos_Formulario extends Component {
                         :formulario.estado == "Terminado"?"bg-success":"bg-warning"}><b>{formulario.estado}</b></td>
                       <td>{formulario.operador_usuario}</td>
                       <td>{formulario.respuesta}</td>
-                      <td>{formulario.estado == "Resuelto"?<a href="#/tablaincidentes" onClick={() => this.onSubmit(formulario.dpi)} className="btn btn-info btn-block">Terminar Caso</a>
+                      <td>{formulario.estado == "Resuelto"?<a href="#/formulario" onClick={() => this.onSubmit(formulario.dpi)} className="btn btn-info btn-block">Terminar Caso</a>
                         :formulario.estado == "Terminado"?<p>Caso Finalizado</p>:<p>En proceso</p>}</td>
                   </tr>
                 ))

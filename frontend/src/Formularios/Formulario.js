@@ -19,16 +19,11 @@ class Formulario extends React.Component {
         this.handleChange = this.handleChange.bind(this);
        
       }
-    
-      
-
-      
 
       //Changes on inputs and selects
       handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
       }
-
       
       async componentDidMount() {
         const inconformidades = (await axios.get(`http://`+ getHost()+`/inconformidad`)).data;
@@ -52,7 +47,7 @@ class Formulario extends React.Component {
                         direccion: this.state.direccion
                     })
                     .then(function (response) {
-                        alert("ya existe caso")
+                        alert("Ya existe caso con el DPI")
                         return(<FormDialog/>)
                     })
                     .catch(function (error) {
@@ -65,8 +60,6 @@ class Formulario extends React.Component {
                 }
 
   render() {
-      
-    
     let selectt1;
     let direcinput;
         if (this.state.inconformidad==="Código no válido banco/cajero" || 
@@ -585,7 +578,6 @@ class Formulario extends React.Component {
         let ctrl = new controlador()
         return ctrl.isDigitador() ? (
     <>
-        
         <main role="main" className="flex-shrink-0 mt-5">
             <section className="text-center">
             <div className="container">
@@ -680,14 +672,11 @@ class Formulario extends React.Component {
                 </div>
                 </div>
                 <hr></hr>
-                
                 <a href="#/formulario" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar Reporte</a>      
             </form>
         </main>
     </>
    ) : <p>Cargando...</p>;
-   
-  
   }
  
 }

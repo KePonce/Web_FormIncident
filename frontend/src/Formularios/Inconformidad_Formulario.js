@@ -27,6 +27,7 @@ class Inconformidad_Formulario extends React.Component {
         this.setState({
             inconformidades
         });
+        this.render()
       }
 
       //Button function to post incidents
@@ -50,7 +51,7 @@ class Inconformidad_Formulario extends React.Component {
                         console.log(error);
                     });
                     this.setState({
-                        inconformidad:'', respuesta:'', estado:'', operador:'', inconformidades:null
+                        inconformidad:'', respuesta:'', estado:'', operador:''
                     });
                 }
 
