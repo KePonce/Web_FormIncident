@@ -47,8 +47,7 @@ class FormularioNuevoUsuario extends Component {
     }
     render(){
         const ctrl = new controlador()
-        //return  ctrl.isLogin() ? (
-        return(
+        return  ctrl.isLogin() ? (
             <div>
                     <div className="row">
                     <div className="col-md-3 mt-5 mx-auto">
@@ -94,7 +93,7 @@ class FormularioNuevoUsuario extends Component {
                     </div>
                 
             </div>
-        )//: <p>Cargando ...</p>;
+        ): <p>Cargando ...</p>;
     }
 }
 
