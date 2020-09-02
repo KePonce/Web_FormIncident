@@ -6,8 +6,9 @@ class FormularioNuevoUsuario extends Component {
     constructor() {
         super()
         this.state ={
-            email:"",
+            user:"",
             password:'',
+            rol:'',
             confirmacion: ''
         }
         this.onChange = this.onChange.bind(this)
@@ -27,8 +28,9 @@ class FormularioNuevoUsuario extends Component {
             return
         }else{      
         axios.post(`http://`+ getHost()+`/InsertarUsuario`,{
-                        nombre: this.state.email,
-                        pass: this.state.password,
+                        user: this.state.user,
+                        password: this.state.password,
+                        rol: this.state.rol
                     })
                     .then(function (response) {
                         alert("Ya existe este usuario")
@@ -38,7 +40,7 @@ class FormularioNuevoUsuario extends Component {
                         console.log(error);
                     });
                     this.setState({
-                        email:"", password:"", confirmacion:""
+                        user:"", password:"", rol:"", confirmacion:""
                     });
         }
         
@@ -48,17 +50,15 @@ class FormularioNuevoUsuario extends Component {
         //return  ctrl.isLogin() ? (
         return(
             <div>
-                
                     <div className="row">
                     <div className="col-md-3 mt-5 mx-auto">
-                        
                             <h1 className="h3 mb-3 font-weight-normal">Agregar Usuario</h1>
                             <div className="form-gruop">
                                 <input type="text"
                                 className="barra"
-                                name="email"
+                                name="user"
                                 placeholder="Ingrese Nombre de Usuario"
-                                value={this.state.email}
+                                value={this.state.user}
                                 onChange={this.onChange}></input>
                             </div>
                             <div className="form-group">
@@ -69,7 +69,6 @@ class FormularioNuevoUsuario extends Component {
                                 value={this.state.password}
                                 onChange={this.onChange}></input>
                             </div>
-
                             <div className="form-group">
                                 <input type="password"
                                 className="barra"
@@ -77,6 +76,13 @@ class FormularioNuevoUsuario extends Component {
                                 placeholder="Confirme la contraseña"
                                 value={this.state.confirmacion}
                                 onChange={this.onChange}></input>
+                            </div>
+                            <div>
+                                <select name="rol" value={this.state.rol} onChange={this.onChange} required>
+                                    <option>digitador</option>
+                                    <option>admin</option>
+                                    <option>solucionador</option>
+                                </select>
                             </div>
                                 <button onClick={() => this.onSubmit()}
                                 type="submit"

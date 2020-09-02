@@ -136,7 +136,7 @@ app.get('/inconformidad', (req, res) => {
   });
 });
 
-// get a specific incidente
+//Get a specific incidente
 app.get('/incidente/:dpi', (req, res) => {
   client.query('SELECT * FROM incidente WHERE dpi = $1', [req.params.dpi], (err, rows, fields)=>{
     if(!err){
@@ -278,6 +278,33 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
     }
     })
   });
+
+//Ingresar nuevo usuario
+app.post('/InsertarUsuario', (req, res) => {
+  let emp = req.body;
+  console.log(emp)
+  client.query('SELECT * FROM operador WHERE usuario = $1', [emp.user], (err, rows, fields)=>{
+    if(!err)
+    {
+      console.log(rows.rows);
+      if(rows.rows.length == 0){
+        var sql = 'INSERT INTO operador(usuario, pass, rol)  VALUES ($1,$2,$3)';
+        client.query(sql, [emp.user, emp.password, emp.rol], function(err, data){
+          if(err)
+          console.log(err);
+          else
+          console.log("Usuario insertado")
+        })
+      }
+      else{
+        res.send("Usuario ya existe");
+      }
+  }
+  else{
+    console.log(err)
+  }
+  })
+});
 
 // start the server
 app.listen(8082, () => {
