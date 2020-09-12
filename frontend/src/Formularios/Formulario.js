@@ -595,7 +595,7 @@ class Formulario extends React.Component {
                 </div>
                 <div className="col-md-6">
                     <div  className="grupo">
-                    <input type="text" name="dpi" value={this.state.dpi} onChange={this.handleChange} pattern="[0-9]+"  minLength="13" maxLength="15" required></input><span className="barra"></span>
+                    <input type="text" name="dpi" value={this.state.dpi} onChange={this.handleChange} pattern="[0-9]+"  minLength="13" maxLength="13" required></input><span className="barra"></span>
                     <label>DPI*:</label>
                     </div>
                 </div> 
