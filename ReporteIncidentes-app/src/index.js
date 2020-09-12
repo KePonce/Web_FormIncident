@@ -238,7 +238,7 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
           })
         }else{
           if(rows.rows[0].estado == 'Terminado'){
-            var sql = 'INSERT INTO incidente(nombre_completo, dpi, celular, inconformidad, departamento, municipio, estado, direccion, fecha_creado,operador_usuario)  VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),(SELECT usuario from operador where usuario=' +"'" + emp.encargado + "'" +'))';
+            var sql = 'INSERT INTO incidente(nombre_completo, dpi, celular, inconformidad, departamento, municipio, estado, direccion, fecha_creado,operador_usuario)  VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),(SELECT operador_usuario from inconformidad where nombre_inconformidad =' +"'" + emp.inconformidad + "'" +'))';
             client.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
             if(err)
             console.log(err);
