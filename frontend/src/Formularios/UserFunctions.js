@@ -25,14 +25,17 @@ export function getPath(rol) {
     }else if(rol == 'admin'){
         console.log("--2")
         return '/tablageneral'
+    }else if(rol == 'consultor'){
+        console.log("--2")
+        return '/tablageneral'
     }
 
 }
 
 //Ruta ip backend
 export function getHost() {
-    
-   return "34.217.43.198:8082"
+    return "localhost:8082"
+   //return "34.217.43.198:8082"
 
 }
 

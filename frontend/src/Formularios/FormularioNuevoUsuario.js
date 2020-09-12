@@ -81,6 +81,7 @@ class FormularioNuevoUsuario extends Component {
                                     <option>digitador</option>
                                     <option>admin</option>
                                     <option>solucionador</option>
+                                    <option>consultor</option>
                                 </select>
                             </div>
                                 <button onClick={() => this.onSubmit()}

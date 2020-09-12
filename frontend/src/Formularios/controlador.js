@@ -18,6 +18,10 @@ export class controlador {
         return localStorage.getItem("rol") === "admin"?true:false;
     }
 
+    isConsultor(){
+        return localStorage.getItem("rol") === "consultor"?true:false;
+    }
+
     isSolucionador(){
         return localStorage.getItem("rol") === "solucionador"?true:false;
     }
