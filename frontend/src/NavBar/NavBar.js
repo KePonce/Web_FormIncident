@@ -41,7 +41,7 @@ function NavBar() {
       <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Usuario: {ctrl.getUser()}</a>
+            <a class="navbar-brand">Usuario: {ctrl.getUser()}</a>
           </div>
           <a className="navbar-brand" href="#/formulario">Formulario</a>
           <a className="navbar-brand" href="#/tablaincidentes">Incidentes</a>
@@ -55,7 +55,7 @@ function NavBar() {
       <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Usuario: {ctrl.getUser()}</a>
+            <a class="navbar-brand">Usuario: {ctrl.getUser()}</a>
           </div>
           <a className="navbar-brand" href="#/solucionarincidente">Incidentes Asignados</a>
           <a href="#/" onClick={() => onSubmit()} className="btn btn-info ">Salir</a>
