@@ -34,7 +34,7 @@ export function getPath(rol) {
 
 //Ruta ip backend
 export function getHost() {
-    //return "localhost:8082"
+   //return "localhost:8082"
    return "34.217.43.198:8082"
 
 }

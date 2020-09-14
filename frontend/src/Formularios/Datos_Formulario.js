@@ -61,6 +61,7 @@ class Datos_Formulario extends Component {
 
   render() {
     let ctrl = new controlador()
+    console.log(ctrl.isLogin() && ctrl.isDigitador())
     if(ctrl.isLogin() && ctrl.isDigitador()){
       return (
           <div class ="container-fluid">

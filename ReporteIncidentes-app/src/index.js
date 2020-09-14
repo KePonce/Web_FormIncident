@@ -150,6 +150,7 @@ app.get('/incidente/:dpi', (req, res) => {
 //Ingreso de usuario
 app.post('/login', (req, res) => {
   let emp = req.body;
+  console.log(emp)
   client.query('SELECT * FROM operador WHERE usuario = $1', [emp.usuario], (err, rows, fields)=>{
     if(!err && rows.rows.length > 0){
       if(emp.pass==rows.rows[0].pass) {
@@ -282,11 +283,9 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
 //Ingresar nuevo usuario
 app.post('/InsertarUsuario', (req, res) => {
   let emp = req.body;
-  console.log(emp)
   client.query('SELECT * FROM operador WHERE usuario = $1', [emp.user], (err, rows, fields)=>{
     if(!err)
     {
-      console.log(rows.rows);
       if(rows.rows.length == 0){
         var sql = 'INSERT INTO operador(usuario, pass, rol)  VALUES ($1,$2,$3)';
         client.query(sql, [emp.user, emp.password, emp.rol], function(err, data){

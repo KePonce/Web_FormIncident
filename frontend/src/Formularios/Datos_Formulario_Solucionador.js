@@ -65,7 +65,6 @@ class Datos_Formulario_Worker extends Component {
 
   render() {
     let ctrl = new controlador()
-    console.log(ctrl.isLogin(), ctrl.isSolucionador())
     if (ctrl.isLogin() && ctrl.isSolucionador()){
       return (
         <div class ="container-fluid">

@@ -76,18 +76,20 @@ class FormularioNuevoUsuario extends Component {
                                 value={this.state.confirmacion}
                                 onChange={this.onChange}></input>
                             </div>
-                            <div>
-                                <select name="rol" value={this.state.rol} onChange={this.onChange} required>
+                            <div className="col-md-12">
+                                <select name="rol" value={this.state.rol} onChange={this.onChange}  required>
+                                    <option></option>
                                     <option>digitador</option>
                                     <option>admin</option>
                                     <option>solucionador</option>
                                     <option>consultor</option>
-                                </select>
+                                </select><span className="barra"></span>
+                                <label>Seleccione Rol de Usuario</label>
                             </div>
                                 <button onClick={() => this.onSubmit()}
                                 type="submit"
                                 className="btn btn-lg btn-primary btn-block">
-                                    Agregar nuevo usuario
+                                    Agregar Usuario
                                 </button>
                         
                         </div> 
