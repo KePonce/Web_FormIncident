@@ -41,10 +41,10 @@ class Formulario extends React.Component {
           if (this.state.name==="") {
             alert("Debe ingresar nombre")
           }
-          else if (this.state.dpi==="" || this.state.dpi.length<13) {
+          else if (this.state.dpi==="" || this.state.dpi.length<13 || isNaN(this.state.dpi)) {
             alert("DPI vacío o incorrecto")
           }
-          else if (this.state.celular==="" || this.state.celular.length<8) {
+          else if (this.state.celular==="" || this.state.celular.length<8 || isNaN(this.state.celular)) {
             alert("Celular vacío o incorrecto")
           }
           else if (this.state.departamento==="") {
