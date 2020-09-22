@@ -32,7 +32,6 @@ class Inconformidad_Formulario extends React.Component {
 
       //Button function to post incidents
       onSubmit = () => {
-
                     if(this.state.respuesta===null){
                         this.state.respuesta=''
                     }

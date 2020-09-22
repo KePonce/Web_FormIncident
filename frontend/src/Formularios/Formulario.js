@@ -31,6 +31,11 @@ class Formulario extends React.Component {
         });
       }
 
+      handleReset = () => {
+        this.setState({name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
+                        estado:"", descripcion:"", encargado:"", direccion:""});
+      }
+
       //Button function to post incidents
       onSubmit = () => {
           if (this.state.name==="") {
@@ -66,10 +71,6 @@ class Formulario extends React.Component {
                 })
                 .then(function (response) {
                     alert(response.data)
-                    if (response.data==="Datos insertados") {
-                        this.setState({name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
-                        estado:"", descripcion:"", encargado:"", direccion:""});
-                    }
                     return(<FormDialog/>)
                 })
                 .catch(function (error) {
@@ -693,6 +694,7 @@ class Formulario extends React.Component {
                 </div>
                 <hr></hr>
                 <a href="#/formulario" type="submit" onClick={() => this.onSubmit()} className="btn btn-info btn-block">Enviar Reporte</a>      
+                <a href="#/formulario" type="submit" onClick={() => this.handleReset()} className="btn btn-info btn-block">Ingresar Nuevo</a>      
             </form>
         </main>
     </>

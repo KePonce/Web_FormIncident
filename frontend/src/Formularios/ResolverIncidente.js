@@ -52,6 +52,7 @@ class Editar_Formulario extends Component {
     return  ctrl.isLogin() ? (
       <div className="container">
       <div className="row">
+        <h1>Resolver incidente</h1>
         <div className="jumbotron col-12">
         {this.state.formulario && this.state.formulario.map(form => (
           <div>

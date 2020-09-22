@@ -255,6 +255,7 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
         }
         else{
           console.log(err)
+          res.send(err)
         }
         })
   });
