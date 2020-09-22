@@ -31,11 +31,6 @@ class Formulario extends React.Component {
         });
       }
 
-      limpiar = () => {
-        this.setState({name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
-        estado:"", descripcion:"", encargado:"", direccion:""});
-      }
-
       handleReset = () => {
         this.setState({name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
                         estado:"", descripcion:"", encargado:"", direccion:""});
