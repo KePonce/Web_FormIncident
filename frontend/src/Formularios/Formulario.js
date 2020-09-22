@@ -31,6 +31,11 @@ class Formulario extends React.Component {
         });
       }
 
+      limpiar = () => {
+        this.setState({name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
+        estado:"", descripcion:"", encargado:"", direccion:""});
+      }
+
       handleReset = () => {
         this.setState({name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
                         estado:"", descripcion:"", encargado:"", direccion:""});
@@ -69,8 +74,11 @@ class Formulario extends React.Component {
                     encargado: this.state.encargado,
                     direccion: this.state.direccion
                 })
-                .then(function (response) {
+                .then(response => {
                     alert(response.data)
+                    if (response.data==="Datos insertados") {
+                        this.handleReset()
+                    }
                     return(<FormDialog/>)
                 })
                 .catch(function (error) {
