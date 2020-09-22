@@ -17,7 +17,6 @@ class Formulario extends React.Component {
         };
        
         this.handleChange = this.handleChange.bind(this);
-       
       }
 
       //Changes on inputs and selects
@@ -34,30 +33,51 @@ class Formulario extends React.Component {
 
       //Button function to post incidents
       onSubmit = () => {
-                    axios.post(`http://`+ getHost()+`/InsertarInc`,{
-                        nombre: this.state.name,
-                        dpi: this.state.dpi,
-                        celular: this.state.celular,
-                        inconformidad: this.state.inconformidad,
-                        departamento: this.state.departamento,
-                        municipio: this.state.municipio,
-                        estado: 'Asignado',
-                        descripcion: '',
-                        encargado: this.state.encargado,
-                        direccion: this.state.direccion
-                    })
-                    .then(function (response) {
-                        alert("Ya existe caso con el DPI")
-                        return(<FormDialog/>)
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                    this.setState({
-                        name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
-                        estado:"", descripcion:"", encargado:"", direccion:""
-                    });
-                }
+          if (this.state.name==="") {
+            alert("Debe ingresar nombre")
+          }
+          else if (this.state.dpi==="" || this.state.dpi.length<13) {
+            alert("DPI vacío o incorrecto")
+          }
+          else if (this.state.celular==="" || this.state.celular.length<8) {
+            alert("Celular vacío o incorrecto")
+          }
+          else if (this.state.departamento==="") {
+            alert("Debe de seleccionar departamento")
+          }
+          else if (this.state.municipio==="") {
+            alert("Debe de seleccionar municipio")
+          }
+          else if (this.state.inconformidad==="") {
+            alert("Debe seleccionar inconformidad")
+          }
+          else{
+            axios.post(`http://`+ getHost()+`/InsertarInc`,{
+                    nombre: this.state.name,
+                    dpi: this.state.dpi,
+                    celular: this.state.celular,
+                    inconformidad: this.state.inconformidad,
+                    departamento: this.state.departamento,
+                    municipio: this.state.municipio,
+                    estado: 'Asignado',
+                    descripcion: '',
+                    encargado: this.state.encargado,
+                    direccion: this.state.direccion
+                })
+                .then(function (response) {
+                    alert(response.data)
+                    if (response.data==="Datos insertados") {
+                        this.setState({name: "",dpi: "",celular:"",inconformidad:"", departamento:"", municipio:"",
+                        estado:"", descripcion:"", encargado:"", direccion:""});
+                    }
+                    return(<FormDialog/>)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error)
+                });
+          }       
+        }
 
   render() {
     let selectt1;
@@ -595,7 +615,7 @@ class Formulario extends React.Component {
                 </div>
                 <div className="col-md-6">
                     <div  className="grupo">
-                    <input type="text" name="dpi" value={this.state.dpi} onChange={this.handleChange} pattern="[0-9]+"  minLength="13" maxLength="13" required></input><span className="barra"></span>
+                    <input type="tel" name="dpi" maxLength="13" value={this.state.dpi} onChange={this.handleChange}  required></input><span className="barra"></span>
                     <label>DPI*:</label>
                     </div>
                 </div> 
@@ -604,7 +624,7 @@ class Formulario extends React.Component {
                 <div className="row">
                 <div className="col-md-6">
                     <div className="grupo">
-                    <input type="text" name="celular" value={this.state.celular} onChange={this.handleChange} id="celular" pattern="[0-9]+" maxLength="8" minLength="8" required></input><span className="barra"></span>
+                    <input type="tel" name="celular" minLength="8" maxLength="8" value={this.state.celular} onChange={this.handleChange} id="celular" required></input><span className="barra"></span>
                     <label>Teléfono registrado*</label>
                     </div>
                 </div>
@@ -623,7 +643,7 @@ class Formulario extends React.Component {
                             <option>El Progreso</option>
                             <option>Quiché</option>
                             <option>Escuintla </option>
-                            <option> Guatemala</option>
+                            <option>Guatemala</option>
                             <option>Huehuetenango</option>
                             <option>Izabal</option>
                             <option>Jalapa</option>

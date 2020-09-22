@@ -226,35 +226,37 @@ app.post('/ActualizarEstado/:dpi', (req, res) => {
 //Insertar nuevo incidente
   app.post('/InsertarInc', (req, res) => {
     let emp = req.body;
-    client.query('SELECT * FROM incidente WHERE dpi = $1', [emp.dpi], (err, rows, fields)=>{
-      if(!err)
-      {
-        if(rows.rows.length == 0){
-          var sql = 'INSERT INTO incidente(nombre_completo, dpi, celular, inconformidad, departamento, municipio, estado, direccion, fecha_creado,operador_usuario) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),(SELECT operador_usuario from inconformidad where nombre_inconformidad =' +"'" + emp.inconformidad + "'" +'))';
-          client.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
-            if(err)
-            console.log(err);
-            else
-            console.log("Datos insertados")
-          })
-        }else{
-          if(rows.rows[0].estado == 'Terminado'){
-            var sql = 'INSERT INTO incidente(nombre_completo, dpi, celular, inconformidad, departamento, municipio, estado, direccion, fecha_creado,operador_usuario)  VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),(SELECT operador_usuario from inconformidad where nombre_inconformidad =' +"'" + emp.inconformidad + "'" +'))';
-            client.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
-            if(err)
-            console.log(err);
-            else
-            console.log("Datos insertados")
-          })
-          }else{
-            res.send("Ya existe un caso con este dpi")
-          }
+      client.query('SELECT * FROM incidente WHERE dpi = $1', [emp.dpi], (err, rows, fields)=>{
+        if(!err)
+        {
+          if(rows.rows.length == 0){
+              var sql = 'INSERT INTO incidente(nombre_completo, dpi, celular, inconformidad, departamento, municipio, estado, direccion, fecha_creado,operador_usuario) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),(SELECT operador_usuario from inconformidad where nombre_inconformidad =' +"'" + emp.inconformidad + "'" +'))';
+              client.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
+                if(err){
+                console.log(err);
+                res.send(err)}
+                else
+                res.send("Datos insertados")
+              })
+            }else{
+              if(rows.rows[0].estado == 'Terminado'){
+                var sql = 'INSERT INTO incidente(nombre_completo, dpi, celular, inconformidad, departamento, municipio, estado, direccion, fecha_creado,operador_usuario)  VALUES ($1,$2,$3,$4,$5,$6,$7,$8,now(),(SELECT operador_usuario from inconformidad where nombre_inconformidad =' +"'" + emp.inconformidad + "'" +'))';
+                client.query(sql, [emp.nombre, emp.dpi, emp.celular, emp.inconformidad, emp.departamento, emp.municipio, emp.estado, emp.direccion], function(err, data){
+                if(err){
+                  console.log(err);
+                  res.send(err)}
+                else
+                res.send("Datos insertados")
+              })
+              }else{
+                res.send("Ya existe un caso con este dpi")
+              }
+            }
         }
-    }
-      else{
-      console.log(err)
-    }
-    })
+        else{
+          console.log(err)
+        }
+        })
   });
 
 //Ingresar nueva inconformidad
