@@ -21,9 +21,9 @@ class Formulario extends React.Component {
 
       //Changes on inputs and selects
       handleChange(event) {
-        this.setState({[event.target.name]: event.target.value});
+            this.setState({[event.target.name]: event.target.value});
       }
-      
+
       async componentDidMount() {
         const inconformidades = (await axios.get(`http://`+ getHost()+`/inconformidad`)).data;
         this.setState({
@@ -38,13 +38,16 @@ class Formulario extends React.Component {
 
       //Button function to post incidents
       onSubmit = () => {
+        let reg = /^(3|4|5{1})[0-9]{7}$/;
+        console.log(this.state.celular)
+        console.log(reg.test(this.state.celular))
           if (this.state.name==="") {
             alert("Debe ingresar nombre")
           }
           else if (this.state.dpi==="" || this.state.dpi.length<13 || isNaN(this.state.dpi)) {
             alert("DPI vacío o incorrecto")
           }
-          else if (this.state.celular==="" || this.state.celular.length<8 || isNaN(this.state.celular)) {
+          else if (!reg.test(this.state.celular)) {
             alert("Celular vacío o incorrecto")
           }
           else if (this.state.departamento==="") {
@@ -619,16 +622,16 @@ class Formulario extends React.Component {
                 </div>
                 <div className="col-md-6">
                     <div  className="grupo">
-                    <input type="tel" name="dpi" maxLength="13" value={this.state.dpi} onChange={this.handleChange}  required></input><span className="barra"></span>
+                    <input type="text" name="dpi" maxLength="13" value={this.state.dpi} onChange={this.handleChange}  required></input><span className="barra"></span>
                     <label>DPI*:</label>
                     </div>
-                </div> 
+                </div>  
                 </div>
                 <hr></hr>
                 <div className="row">
                 <div className="col-md-6">
                     <div className="grupo">
-                    <input type="tel" name="celular" minLength="8" maxLength="8" value={this.state.celular} onChange={this.handleChange} id="celular" required></input><span className="barra"></span>
+                    <input type="tel" name="celular" maxLength="8" value={this.state.celular} onChange={this.handleChange} id="celular" required></input><span className="barra"></span>
                     <label>Teléfono registrado*</label>
                     </div>
                 </div>

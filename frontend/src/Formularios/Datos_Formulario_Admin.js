@@ -42,6 +42,7 @@ class Datos_Formulario_Admin extends Component {
     })
     .then(function (response) {
         alert(response);
+        this.render()
     })
     .catch(function (error) {
         console.log(error);

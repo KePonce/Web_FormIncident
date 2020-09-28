@@ -30,28 +30,42 @@ class Inconformidad_Formulario extends React.Component {
         this.render()
       }
 
+      handleReset = () => {
+        this.setState({
+            inconformidad:'', respuesta:'', estado:'', operador:''
+        });
+      }
+
       //Button function to post incidents
       onSubmit = () => {
                     if(this.state.respuesta===null){
                         this.state.respuesta=''
                     }
-                    //Ingresar nueva inconformidad
-                    axios.post(`http://`+ getHost()+`/NuevaInconformidad`,{
-                        nombre_inconformidad: this.state.inconformidad,
-                        encargado: this.state.operador,
-                        respuesta: this.state.respuesta,
-                        estado:'Activo',
-                        operador: this.state.operador
-                    })
-                    .then(function (response) {
-                        alert(response.data);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                    this.setState({
-                        inconformidad:'', respuesta:'', estado:'', operador:''
-                    });
+                    if (this.state.inconformidad==='') {
+                        alert("Debe ingresar inconformidad")
+                    }
+                    else if (this.state.operador==="") {
+                        alert("Debe seleccionar encargado")
+                    }
+                    else{
+                        axios.post(`http://`+ getHost()+`/NuevaInconformidad`,{
+                            nombre_inconformidad: this.state.inconformidad,
+                            encargado: this.state.operador,
+                            respuesta: this.state.respuesta,
+                            estado:'Activo',
+                            operador: this.state.operador
+                        })
+                        .then(response => {
+                            alert(response.data);
+                            if (response.data==="Datos insertados") {
+                                this.handleReset()
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+                    }
                 }
 
   render() {

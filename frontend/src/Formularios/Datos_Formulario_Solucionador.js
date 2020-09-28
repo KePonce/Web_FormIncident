@@ -8,7 +8,7 @@ class Datos_Formulario_Worker extends Component {
     super(props);
 
     this.state = {
-      formularios: null,
+      formularios: null
     };
   }
 
@@ -20,6 +20,7 @@ class Datos_Formulario_Worker extends Component {
     })
     .then(function (response) {
         alert(response);
+        this.render()
     })
     .catch(function (error) {
         console.log(error);
@@ -31,8 +32,7 @@ class Datos_Formulario_Worker extends Component {
   async componentDidMount() {
     let ctrl = new controlador()
     const formularios = (await axios.get(`http://`+ getHost()+`/IncidenteSolucionador/`+ctrl.getUser())).data;
-    
-    
+    document.getElementById("titulo").innerHTML = "Todos los Incidentes";
     this.setState({
       formularios
     });
@@ -40,7 +40,9 @@ class Datos_Formulario_Worker extends Component {
   }
 
   async getResueltos(){
-    const formularios = (await axios.get(`http://`+ getHost()+`/incidenteresuelto`)).data;
+    let ctrl = new controlador()
+    const formularios = (await axios.get(`http://`+ getHost()+`/resueltoencargado/`+ctrl.getUser())).data;
+    document.getElementById("titulo").innerHTML = "Incidentes Resueltos";
     this.setState({
       formularios
     });
@@ -48,7 +50,9 @@ class Datos_Formulario_Worker extends Component {
   }
 
   async getAsignados(){
-    const formularios = (await axios.get(`http://`+ getHost()+`/incidenteasignado`)).data;
+    let ctrl = new controlador()
+    const formularios = (await axios.get(`http://`+ getHost()+`/asignadoencargado/`+ctrl.getUser())).data;
+    document.getElementById("titulo").innerHTML = "Incidentes Asignados";
     this.setState({
       formularios
     });
@@ -56,7 +60,9 @@ class Datos_Formulario_Worker extends Component {
   }
 
   async getTerminados() {
-    const formularios = (await axios.get(`http://`+ getHost()+`/incidenteterminado`)).data;
+    let ctrl = new controlador()
+    const formularios = (await axios.get(`http://`+ getHost()+`/terminadoencargado/`+ctrl.getUser())).data;
+    document.getElementById("titulo").innerHTML = "Incidentes Terminados";
     this.setState({
       formularios
     });
@@ -75,6 +81,7 @@ class Datos_Formulario_Worker extends Component {
               <button onClick={() => this.componentDidMount()} className="btn btn-dark">Todos</button>            
             </div>  
           <div>
+          <h3 id="titulo">Todos los Incidentes</h3>
             <table class="table" >
               <thead class="thead-dark">
                 <tr>

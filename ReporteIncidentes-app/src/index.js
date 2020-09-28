@@ -85,6 +85,17 @@ app.get('/incidenteasignado', (req, res) => {
   });
 });
 
+//Obtiene los incidentes con estado asignado de un encargado
+app.get('/asignadoencargado/:encargado', (req, res) => {
+  console.log(req.params.encargado)
+  client.query(`SELECT * FROM incidente WHERE estado = 'Asignado' AND operador_usuario = $1`, [req.params.encargado],(err, rows, fields)=>{
+    if(!err){
+    res.send(rows.rows);}
+    else
+    console.log(err)
+  });
+});
+
 //Obtiene los incidentes con estado resuelto
 app.get('/incidenteresuelto', (req, res) => {
   client.query(`SELECT * FROM incidente WHERE estado = 'Resuelto'`, (err, rows, fields)=>{
@@ -95,9 +106,31 @@ app.get('/incidenteresuelto', (req, res) => {
   });
 });
 
+//Obtiene los incidentes con estado resuelto de un encargado
+app.get('/resueltoencargado/:encargado', (req, res) => {
+  console.log(req.params.encargado)
+  client.query(`SELECT * FROM incidente WHERE estado = 'Resuelto' AND operador_usuario = $1`, [req.params.encargado],(err, rows, fields)=>{
+    if(!err){
+    res.send(rows.rows);}
+    else
+    console.log(err)
+  });
+});
+
 //Obtiene los incidentes con estado terminado
 app.get('/incidenteterminado', (req, res) => {
   client.query(`SELECT * FROM incidente WHERE estado = 'Terminado'`, (err, rows, fields)=>{
+    if(!err){
+    res.send(rows.rows);}
+    else
+    console.log(err)
+  });
+});
+
+//Obtiene los incidentes con estado terminado de un encargado
+app.get('/terminadoencargado/:encargado', (req, res) => {
+  console.log(req.params.encargado)
+  client.query(`SELECT * FROM incidente WHERE estado = 'Terminado' AND operador_usuario = $1`, [req.params.encargado],(err, rows, fields)=>{
     if(!err){
     res.send(rows.rows);}
     else

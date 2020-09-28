@@ -47,6 +47,9 @@ class Datos_Formulario extends Component {
     .catch(function (error) {
         console.log(error);
     });
+    //llamada para actualizar estado de terminado
+    this.componentDidMount()
+    this.render() 
 }
 
   //Conexion con el backend en puerto 8082
@@ -103,7 +106,7 @@ class Datos_Formulario extends Component {
                         :formulario.estado == "Terminado"?"bg-success":"bg-warning"}><b>{formulario.estado}</b></td>
                       <td>{formulario.operador_usuario}</td>
                       <td>{formulario.respuesta}</td>
-                      <td>{formulario.estado == "Resuelto"?<a href="#/formulario" onClick={() => this.onSubmit(formulario.dpi)} className="btn btn-info btn-block">Terminar Caso</a>
+                      <td>{formulario.estado == "Resuelto"?<a href="#/tablaincidentes" onClick={() => this.onSubmit(formulario.dpi)} className="btn btn-info btn-block">Terminar Caso</a>
                         :formulario.estado == "Terminado"?<p>Caso Finalizado</p>:<p>En proceso</p>}</td>
                   </tr>
                 ))
